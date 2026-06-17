@@ -181,7 +181,7 @@ const themes = [
     id: "liants", tag: "Liants HC", title: "Liants hydrocarbonés",
     cards: [
       { q: "Pour quelles applications trouve-t-on des liants hydrocarbonés au quotidien ?", indice: "Les plus connues", r: ["Route et autoroute","Toitures","Étanchéité","Enrobés protecteurs"], keys: [["route","autoroute"],["toiture"],["etancheite","etanche"],["enrobe","protecteur"]], minKeys: 3 },
-      { q: "Quelles sont les propriétés mécaniques des liants hydrocarbonés ?", indice: "Il y en a quatre", r: ["Résistance à l'arrachement","Résistance au cisaillement","Résistance à la compression","Résistance à la fatigue"], keys: [["arrachement"],["cisaillement"],["compression"],["fatigue"]], minKeys: 3 },
+      { q: "Quelles sont les propriétés mécaniques des liants hydrocarbonés ?", indice: "Il y en a quatre", r: ["Résistance à la traction","Résistance au cisaillement","Résistance à la compression","Résistance à la fatigue"], keys: [["traction"],["cisaillement"],["compression"],["fatigue"]], minKeys: 3 },
       { q: "Dans le domaine des routes, les liants bitumineux sont utilisés pour :", indice: "Fabrication et pose", r: ["Servant à la pose d'enduits superficiels","De couche d'accrochage","Dans les enrobés / divers"], keys: [["enduit","pose","superficiel"],["accrochage","couche"],["enrobe","divers"]], minKeys: 2 },
       { q: "Comment sont créés les bitumes de pétrole ?", indice: "Comme le whisky", r: ["Par distillation atmosphérique","Par la distillation sous vide"], keys: [["distillation","atmospherique","atmospherique"],["sous vide","vide","distillation"]], minKeys: 1 },
     ]
@@ -189,13 +189,13 @@ const themes = [
   {
     id: "admin", tag: "ENG-TP ADM", title: "Documents & administration matériel",
     cards: [
-      { q: "Citez les 4 principaux documents devant accompagner un véhicule ou engin.", indice: "Dans le véhicule", r: ["Carte mécanographique","Carnet de bord","Le guide technique du véhicule","La fiche jébom"], keys: [["mecanographique","carte"],["carnet","bord"],["guide technique","guide","technique"],["jebom","fiche"]], minKeys: 3 },
+      { q: "Citez les 4 principaux documents devant accompagner un véhicule ou engin.", indice: "Dans le véhicule", r: ["Carte mécanographique","Carnet de bord","Le guide technique du véhicule","La fiche jéton"], keys: [["mecanographique","carte"],["carnet","bord"],["guide technique","guide","technique"],["jeton","fiche"]], minKeys: 3 },
       { q: "Quels documents doivent accompagner un véhicule roulant dans le domaine public ?", indice: "Panne et accident", r: ["Consigne de dépannage","Constat"], keys: [["consigne","depannage"],["constat"]], minKeys: 1 },
       { q: "Quel document doit accompagner un engin de levage ?", indice: "PV", r: ["PV IM 36002"], keys: [["36002","im 36002","pv im","pv"]], minKeys: 1 },
-      { q: "Quel document permet de suivre les échéances de visite ?", indice: "Potentiels", r: ["La fiche jébom."], keys: [["jebom"]], minKeys: 1 },
+      { q: "Quel document permet de suivre les échéances de visite ?", indice: "Potentiels", r: ["La fiche jéton."], keys: [["jeton"]], minKeys: 1 },
       { q: "Qui est habilité à signer un carnet de bord pour un nouveau déplacement ?", indice: "FAC", r: ["Une autorité accréditée et identifiée sur le FAC similé."], keys: [["autorite","accredite","habilite"],["fac"]], minKeys: 1 },
       { q: "Dans quels cas est éditée une demande de réparation, d'entretien ou d'intervention ?", indice: "3 cas", r: ["Visite arrivée à échéance","Une panne","Une détérioration"], keys: [["visite","echeance"],["panne"],["deterioration","deteriore"]], minKeys: 2 },
-      { q: "Quels documents permettent de retracer la vie d'un engin ou véhicule ?", indice: "MAT", r: ["MAT 7077","MAT 10004"], keys: [["7077"],["10004","10 004"]], minKeys: 1 },
+      { q: "Quels documents permettent de retracer la vie d'un engin ou véhicule ?", indice: "MAT", r: ["MAT 1017","MAT 10004"], keys: [["1017"],["10004","10 004"]], minKeys: 1 },
       { q: "Quel document atteste de la conformité d'un entretien ?", indice: "Rempli par l'utilisateur", r: ["La fiche d'entretien ou de visite."], keys: [["entretien","visite"],["fiche"]], minKeys: 1 },
       { q: "Quel outil permet de faire un suivi des matériels en dotation ?", indice: "Physique ou dématérialisé", r: ["Le tableau de suivi du matériel."], keys: [["tableau","suivi"],["materiel"]], minKeys: 1 },
     ]
@@ -206,7 +206,7 @@ const themes = [
       { q: "Quels sont les trois groupes d'engins de travaux publics ?", indice: "3 groupes", r: ["Engins de chargement et manutention","Engins de transport","Engins de finition"], keys: [["chargement","manutention"],["transport"],["finition"]], minKeys: 2 },
       { q: "Quels sont les aléas impactant la phase de terrassement ?", indice: "2 types", r: ["Techniques","Climatiques"], keys: [["technique"],["climatique"]], minKeys: 2 },
       { q: "Qu'est-ce que le remblai ?", indice: "Volume", r: ["Volume de matériaux rapportés."], keys: [["materiaux","volume"],["rapporte","apporte","ajoute"]], minKeys: 1 },
-      { q: "Quel coefficient utiliser pour passer d'un volume en place à un volume tassé ?", indice: "X", r: ["Le coefficient de tassement (ou de compactage Cc) : Fr = F × T, avec Fr le foisonnement résiduel."], keys: [["tassement","compactage","cc","foisonnement"]], minKeys: 1 },
+      { q: "Quel coefficient utiliser pour passer d'un volume en place à un volume tassé ?", indice: "X", r: ["C'est le volume en place × Fr (Fr = F × T, le coefficient de foisonnement résiduel)."], keys: [["volume en place","place","foisonnement","fr","tassement","compactage"]], minKeys: 1 },
       { q: "Quel coefficient est nécessaire pour passer d'un volume à une masse d'un matériau ?", indice: "m³ → Tonnes", r: ["La densité : ρ = M / V."], keys: [["densite","masse volumique"]], minKeys: 1 },
       { q: "Sur une coupe verticale, quels sont les types de profils que l'on peut rencontrer ?", indice: "3 profils", r: ["Déblais","Remblais","Mixte"], keys: [["deblai"],["remblai"],["mixte"]], minKeys: 2 },
       { q: "Que peut-on retrouver comme éléments dans les dépendances de chaussée ?", indice: "4 éléments", r: ["Fossé","Barrières","Talus","Trottoir"], keys: [["fosse"],["barriere"],["talus"],["trottoir"]], minKeys: 3 },
@@ -218,7 +218,7 @@ const themes = [
       { q: "Quels sont les volets concernés par l'assainissement routier ?", indice: "Naturels, superficielles…", r: ["Rétablissement des écoulements naturels","Collecte et évacuation des eaux superficielles dans l'emprise de la route","Collecte et évacuation des eaux internes (drainage)","Lutte contre la pollution routière"], keys: [["retablissement","ecoulement","naturel"],["superficiel","collecte","evacuation"],["interne","drainage"],["pollution"]], minKeys: 2 },
       { q: "Quelle est la pente longitudinale minimale à respecter pour une route ?", indice: "%", r: ["0,5 à 1 %"], keys: [["0,5","0.5","05"],["1"]], minKeys: 1 },
       { q: "Quelle est la hauteur déterminante pour établir un fossé sur un profil en remblais ?", indice: "Pied ou tête de remblai", r: ["H < 3 m : fossé de pied de remblai","H > 3 m : fossé en tête de remblai, puis descente d'eau bétonnée jusqu'au pied de remblai"], keys: [["3"],["pied","tete","remblai"]], minKeys: 2 },
-      { q: "Quelle pente doit respecter un fossé ou ouvrage longitudinal en bord de chaussée ?", indice: "=", r: ["Revêtu si la pente est ≥ 1 % (au-delà de 4 % on effectue des ressauts)."], keys: [["1"],["revetu","pente","4"]], minKeys: 1 },
+      { q: "Quelle pente doit respecter un fossé ou ouvrage longitudinal en bord de chaussée ?", indice: "=", r: ["Revêtu si la pente est ≥ 1 %."], keys: [["1"],["revetu","pente"]], minKeys: 1 },
       { q: "À partir de quel pourcentage de pente de fossé faut-il effectuer des ressauts ?", indice: "> à 4 %", r: ["Au-delà de 4 %."], keys: [["4"]], minKeys: 1 },
       { q: "Qu'est-ce que le drainage ?", indice: "", r: ["Il consiste à collecter et à évacuer les eaux internes de la route ; elles proviennent des infiltrations au travers de la chaussée ou depuis les accotements, issues de l'environnement."], keys: [["collecter","evacuer","collecte"],["eau","interne"],["infiltration","chaussee","accotement"]], minKeys: 2 },
       { q: "Citez trois dispositifs de drainage.", indice: "", r: ["Fossés profonds","Tranchées drainantes","Saignées drainantes","Éperon drainant","Couche drainante"], keys: [["fosse"],["tranchee"],["saignee"],["eperon"],["couche"]], minKeys: 3 },
