@@ -3,291 +3,89 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Béton — Fiche de Mémorisation</title>
+<title>Révision Génie — Fiches de Mémorisation</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;500;600&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --rouge: #C0272D;
-    --anthracite: #2B2B2B;
-    --gris-fonce: #3D3D3D;
-    --gris-moyen: #6B6B6B;
-    --beton: #D4CFC8;
-    --blanc: #F7F5F2;
-    --vert: #2D7A4F;
+    --rouge: #C0272D; --anthracite: #2B2B2B; --gris-fonce: #3D3D3D;
+    --gris-moyen: #6B6B6B; --beton: #D4CFC8; --blanc: #F7F5F2; --vert: #2D7A4F;
   }
-
-  body {
-    background: var(--anthracite);
-    color: var(--blanc);
-    font-family: 'Barlow', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header {
-    background: var(--anthracite);
-    border-bottom: 3px solid var(--rouge);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .tag-beton {
-    background: var(--rouge);
-    color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 900;
-    font-size: 13px;
-    letter-spacing: 2px;
-    padding: 5px 12px;
-    clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%);
-    text-transform: uppercase;
-  }
-
-  h1 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: clamp(18px, 4vw, 26px);
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
+  body { background: var(--anthracite); color: var(--blanc); font-family: 'Barlow', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+  header { background: var(--anthracite); border-bottom: 3px solid var(--rouge); padding: 16px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .tag-beton { background: var(--rouge); color: white; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: 2px; padding: 5px 12px; clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%); text-transform: uppercase; }
+  h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(16px, 4vw, 24px); font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+  .home-link { background: none; border: none; color: var(--gris-moyen); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: underline; }
+  .home-link:hover { color: var(--blanc); }
   .progress-bar-wrap { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-  .progress-bar { width: 120px; height: 6px; background: var(--gris-fonce); border-radius: 3px; overflow: hidden; }
+  .progress-bar { width: 110px; height: 6px; background: var(--gris-fonce); border-radius: 3px; overflow: hidden; }
   .progress-fill { height: 100%; background: var(--rouge); border-radius: 3px; transition: width 0.4s ease; }
   .progress-text { font-size: 12px; color: var(--gris-moyen); font-weight: 600; white-space: nowrap; }
-
-  .mode-selector {
-    display: flex;
-    padding: 20px 24px 0;
-    border-bottom: 1px solid var(--gris-fonce);
-    flex-wrap: wrap;
-  }
-
-  .mode-btn {
-    background: none;
-    border: none;
-    color: var(--gris-moyen);
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 10px 16px;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s;
-  }
-
+  .mode-selector { display: flex; padding: 20px 24px 0; border-bottom: 1px solid var(--gris-fonce); flex-wrap: wrap; }
+  .mode-btn { background: none; border: none; color: var(--gris-moyen); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 10px 16px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
   .mode-btn.active { color: var(--blanc); border-bottom-color: var(--rouge); }
-  .mode-btn:hover:not(.active):not(:disabled) { color: var(--beton); }
-  .mode-btn:disabled { opacity: 0.35; cursor: default; }
-  .mode-btn .err-count {
-    background: var(--rouge);
-    color: white;
-    border-radius: 10px;
-    padding: 1px 7px;
-    font-size: 11px;
-    margin-left: 5px;
-  }
+  .mode-btn:hover:not(.active) { color: var(--beton); }
+  .mode-btn .err-count { background: var(--rouge); color: white; border-radius: 10px; padding: 1px 7px; font-size: 11px; margin-left: 5px; }
+  main { flex: 1; padding: 28px 24px; max-width: 720px; margin: 0 auto; width: 100%; }
 
-  main { flex: 1; padding: 28px 24px; max-width: 700px; margin: 0 auto; width: 100%; }
+  /* HOME */
+  .home-title { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .home-sub { color: var(--gris-moyen); margin-bottom: 28px; font-size: 15px; }
+  .theme-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 560px) { .theme-grid { grid-template-columns: 1fr 1fr; } }
+  .theme-card { background: var(--gris-fonce); border: 1px solid transparent; border-radius: 4px; padding: 20px; cursor: pointer; transition: all 0.18s; text-align: left; display: flex; flex-direction: column; gap: 6px; }
+  .theme-card:hover { border-color: var(--rouge); transform: translateY(-2px); }
+  .theme-card .tc-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rouge); }
+  .theme-card .tc-title { font-size: 17px; font-weight: 600; line-height: 1.3; }
+  .theme-card .tc-count { font-size: 12px; color: var(--gris-moyen); margin-top: 4px; }
 
-  .learn-card {
-    background: var(--gris-fonce);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-  }
-
-  .card-indice {
-    background: var(--rouge);
-    padding: 12px 20px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
+  /* CARDS */
+  .learn-card { background: var(--gris-fonce); border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+  .card-indice { background: var(--rouge); padding: 12px 20px; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .indice-value { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 2px; font-size: 14px; letter-spacing: 0; }
-
-  .card-question {
-    padding: 28px 24px 20px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.5;
-    color: var(--beton);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
+  .card-question { padding: 28px 24px 20px; font-size: 18px; font-weight: 500; line-height: 1.5; color: var(--beton); border-bottom: 1px solid rgba(255,255,255,0.06); }
   .card-reponse { padding: 20px 24px 28px; font-size: 16px; line-height: 1.7; }
   .card-reponse ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
   .card-reponse ul li::before { content: '\25B6'; color: var(--rouge); font-size: 10px; margin-right: 10px; }
   .card-reponse-hidden { display: flex; align-items: center; justify-content: center; min-height: 80px; }
-
-  .reveal-btn {
-    background: none;
-    border: 2px dashed var(--gris-moyen);
-    color: var(--gris-moyen);
-    font-family: 'Barlow', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 14px 32px;
-    cursor: pointer;
-    border-radius: 2px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.2s;
-  }
-
+  .reveal-btn { background: none; border: 2px dashed var(--gris-moyen); color: var(--gris-moyen); font-family: 'Barlow', sans-serif; font-size: 14px; font-weight: 600; padding: 14px 32px; cursor: pointer; border-radius: 2px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
   .reveal-btn:hover { border-color: var(--beton); color: var(--beton); }
-
   .nav-buttons { display: flex; gap: 12px; margin-top: 20px; }
-
-  .nav-btn {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 2px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
+  .nav-btn { flex: 1; padding: 14px; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
   .btn-prev { background: var(--gris-fonce); color: var(--gris-moyen); border: 1px solid var(--gris-moyen); }
   .btn-prev:hover:not(:disabled) { color: var(--blanc); border-color: var(--blanc); }
   .btn-prev:disabled { opacity: 0.3; cursor: default; }
   .btn-next { background: var(--rouge); color: white; }
   .btn-next:hover { background: #a01f24; }
-
   .card-counter { text-align: center; margin-top: 14px; font-size: 12px; color: var(--gris-moyen); font-weight: 600; letter-spacing: 1px; }
 
-  .quiz-question-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--rouge);
-    margin-bottom: 12px;
-  }
-
+  /* QUIZ */
+  .quiz-question-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rouge); margin-bottom: 12px; }
   .quiz-question-text { font-size: 20px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
   .quiz-indice-hint { font-size: 13px; color: var(--gris-moyen); margin-bottom: 28px; }
   .quiz-indice-hint span { color: var(--beton); font-weight: 600; }
-
-  .quiz-input {
-    width: 100%;
-    background: var(--gris-fonce);
-    border: 2px solid var(--gris-moyen);
-    border-radius: 2px;
-    color: var(--blanc);
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
-    padding: 14px 16px;
-    outline: none;
-    transition: border-color 0.2s;
-    resize: none;
-  }
-
+  .quiz-input { width: 100%; background: var(--gris-fonce); border: 2px solid var(--gris-moyen); border-radius: 2px; color: var(--blanc); font-family: 'Barlow', sans-serif; font-size: 16px; padding: 14px 16px; outline: none; transition: border-color 0.2s; resize: none; }
   .quiz-input:focus { border-color: var(--rouge); }
   .quiz-input.correct { border-color: var(--vert); background: rgba(45,122,79,0.1); }
   .quiz-input.wrong { border-color: var(--rouge); background: rgba(192,39,45,0.08); }
-
-  .quiz-submit {
-    margin-top: 14px;
-    width: 100%;
-    padding: 16px;
-    background: var(--rouge);
-    border: none;
-    border-radius: 2px;
-    color: white;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-
+  .quiz-submit { margin-top: 14px; width: 100%; padding: 16px; background: var(--rouge); border: none; border-radius: 2px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: background 0.15s; }
   .quiz-submit:hover { background: #a01f24; }
   .quiz-submit:disabled { background: var(--gris-moyen); cursor: default; }
-
-  .self-grade-box {
-    margin-top: 16px;
-    padding: 18px 20px;
-    border-radius: 2px;
-    background: var(--gris-fonce);
-    border-left: 3px solid var(--beton);
-    display: none;
-  }
-
-  .self-grade-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--beton);
-    margin-bottom: 10px;
-  }
-
+  .self-grade-box { margin-top: 16px; padding: 18px 20px; border-radius: 2px; background: var(--gris-fonce); border-left: 3px solid var(--beton); display: none; }
+  .self-grade-label { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--beton); margin-bottom: 10px; }
   .self-grade-answer { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
   .self-grade-answer ul { list-style: none; }
   .self-grade-answer ul li::before { content: '\25B6 '; color: var(--rouge); font-size: 10px; }
-
   .self-grade-question { font-size: 14px; color: var(--gris-moyen); margin-bottom: 12px; font-weight: 600; }
-
   .self-grade-buttons { display: flex; gap: 10px; }
-
-  .grade-btn {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 2px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
+  .grade-btn { flex: 1; padding: 14px; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
   .grade-correct { background: var(--vert); color: white; }
   .grade-correct:hover { background: #246340; }
   .grade-wrong { background: var(--rouge); color: white; }
   .grade-wrong:hover { background: #a01f24; }
-
-  .verdict-banner {
-    margin-top: 12px;
-    padding: 10px 16px;
-    border-radius: 2px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    display: none;
-  }
-
+  .verdict-banner { margin-top: 12px; padding: 10px 16px; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: none; }
   .verdict-banner.correct { background: rgba(45,122,79,0.2); color: #4ade80; display: block; }
   .verdict-banner.wrong { background: rgba(192,39,45,0.15); color: #f87171; display: block; }
-
   .score-display { display: flex; gap: 12px; margin-bottom: 24px; }
   .score-badge { flex: 1; background: var(--gris-fonce); padding: 14px; text-align: center; border-radius: 2px; }
   .score-num { font-family: 'Barlow Condensed', sans-serif; font-size: 32px; font-weight: 900; display: block; }
@@ -295,79 +93,36 @@
   .score-badge.mauvais .score-num { color: var(--rouge); }
   .score-badge.restant .score-num { color: var(--beton); }
   .score-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gris-moyen); font-weight: 600; }
-
   .complete-screen { text-align: center; padding: 40px 20px; }
   .complete-icon { font-size: 60px; margin-bottom: 20px; }
-  .complete-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 36px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
+  .complete-title { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
   .complete-sub { color: var(--gris-moyen); margin-bottom: 32px; font-size: 15px; }
-
-  .complete-buttons { display: flex; flex-direction: column; gap: 12px; max-width: 360px; margin: 0 auto; }
-
-  .restart-btn, .errors-btn {
-    border: none;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 16px 40px;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.15s;
-  }
-
+  .complete-buttons { display: flex; flex-direction: column; gap: 12px; max-width: 380px; margin: 0 auto; }
+  .restart-btn, .errors-btn, .home-btn { border: none; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 16px 40px; cursor: pointer; border-radius: 2px; transition: background 0.15s; }
   .restart-btn { background: var(--rouge); color: white; }
   .restart-btn:hover { background: #a01f24; }
   .errors-btn { background: var(--gris-fonce); color: var(--beton); border: 1px solid var(--gris-moyen); }
   .errors-btn:hover { border-color: var(--beton); }
-
-  .review-mode-banner {
-    background: rgba(192,39,45,0.12);
-    border: 1px solid var(--rouge);
-    border-radius: 2px;
-    padding: 10px 16px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #f87171;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .quit-review {
-    background: none;
-    border: none;
-    color: var(--gris-moyen);
-    font-size: 12px;
-    cursor: pointer;
-    text-decoration: underline;
-    font-family: 'Barlow', sans-serif;
-  }
+  .home-btn { background: transparent; color: var(--gris-moyen); border: 1px solid var(--gris-fonce); }
+  .home-btn:hover { color: var(--blanc); border-color: var(--gris-moyen); }
+  .review-mode-banner { background: rgba(192,39,45,0.12); border: 1px solid var(--rouge); border-radius: 2px; padding: 10px 16px; margin-bottom: 20px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #f87171; display: flex; justify-content: space-between; align-items: center; }
+  .quit-review { background: none; border: none; color: var(--gris-moyen); font-size: 12px; cursor: pointer; text-decoration: underline; font-family: 'Barlow', sans-serif; }
   .quit-review:hover { color: var(--blanc); }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="tag-beton">Béton</div>
-  <h1>Fiche de Mémorisation</h1>
-  <div class="progress-bar-wrap">
+  <div class="tag-beton" id="headerTag">Génie</div>
+  <h1 id="headerTitle">Fiches de Mémorisation</h1>
+  <button class="home-link" id="homeLink" onclick="goHome()" style="display:none">&#8962; Accueil</button>
+  <div class="progress-bar-wrap" id="progressWrap" style="display:none">
     <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-    <div class="progress-text" id="progressText">0 / 18</div>
+    <div class="progress-text" id="progressText">0 / 0</div>
   </div>
 </header>
 
-<div class="mode-selector">
+<div class="mode-selector" id="modeSelector" style="display:none">
   <button class="mode-btn active" id="btnLearn" onclick="setMode('learn')">&#128214; Apprendre</button>
   <button class="mode-btn" id="btnQuiz" onclick="setMode('quiz')">&#9999;&#65039; Quiz</button>
   <button class="mode-btn" id="btnErrors" onclick="setMode('errors')">&#128260; Mes erreurs<span class="err-count" id="errCount" style="display:none">0</span></button>
@@ -376,238 +131,261 @@
 <main id="mainArea"></main>
 
 <script>
-const cards = [
-  { q: "Qu'est-ce que le ciment ?", indice: "Réaction au contact de l'eau",
-    r: ["Liant hydraulique d'origine minérale, gâché avec de l'eau, il durcit par suite de réactions chimiques."],
-    keys: [["liant"], ["hydraulique", "eau"], ["durcit", "durci", "durcissement", "reaction"]],
-    minKeys: 2 },
-  { q: "Quelles sont les trois grandes classes de ciment ?", indice: "MPa",
-    r: ["32,5", "42,5", "52,5"],
-    keys: [["32,5", "32.5", "325", "32 5"], ["42,5", "42.5", "425", "42 5"], ["52,5", "52.5", "525", "52 5"]],
-    minKeys: 3 },
-  { q: "À quoi correspond la classe de résistance du ciment ?", indice: "X jours",
-    r: ["À la valeur de la résistance à la compression testée à 28 jours."],
-    keys: [["compression"], ["28"]],
-    minKeys: 2 },
-  { q: "Que signifie la lettre R après la valeur 32,5 ?", indice: "Résistance",
-    r: ["Résistance élevée à court terme."],
-    keys: [["resistance", "rapide"], ["court terme", "court-terme", "rapide", "jeune age", "elevee"]],
-    minKeys: 2 },
-  { q: "Quels types de granulats peuvent être utilisés pour le béton ?", indice: "3 types",
-    r: ["Granulats naturels courants", "Granulats artificiels", "Granulats recyclés"],
-    keys: [["naturel"], ["artificiel"], ["recycle"]],
-    minKeys: 3 },
-  { q: "Quels produits peuvent être incorporés au béton pour modifier ses propriétés ?", indice: "Liquide",
-    r: ["Les adjuvants."],
-    keys: [["adjuvant"]],
-    minKeys: 1 },
-  { q: "Quel produit permet de limiter les contraintes dues au gel sur le béton durci ?", indice: "Bulles d'air",
-    r: ["Adjuvant entraîneur d'air."],
-    keys: [["entraineur", "entraineurs", "entraine"], ["air"]],
-    minKeys: 2 },
-  { q: "Quels types d'eau peuvent être utilisés pour le béton ?", indice: "4 types",
-    r: ["Eau potable", "Eau de pluie", "Eau de nappe phréatique", "Eau de mer (sauf armature)"],
-    keys: [["potable"], ["pluie"], ["nappe", "phreatique"], ["mer"]],
-    minKeys: 3 },
-  { q: "Quel est le dosage en eau recommandé ?", indice: "Rapport eau/ciment",
-    r: ["Entre 0,4 et 0,6 litre d'eau pour 1 kg de ciment."],
-    keys: [["0,4", "0.4", "04"], ["0,6", "0.6", "06"]],
-    minKeys: 2 },
-  { q: "Quel moyen rapide permet de déterminer la formulation adaptée pour un béton ?", indice: "Adapté aux granulats utilisés",
-    r: ["L'abaque de Dreux."],
-    keys: [["abaque", "dreux"]],
-    minKeys: 1 },
-  { q: "Quelles sont les conditions essentielles pour un bon stockage du ciment ?", indice: "Palette, bâche…",
-    r: ["Stocké proprement (palettes…)", "Protégé (pluie et chocs)", "Séparé (les types de ciment)"],
-    keys: [["propre", "proprement", "palette"], ["protege", "pluie", "choc", "bache", "abri", "sec"], ["separe", "separation", "type"]],
-    minKeys: 2 },
-  { q: "Quels sont les documents essentiels à avoir avant d'utiliser un adjuvant ?", indice: "Fiches",
-    r: ["Fiche produit", "Fiche de données sécurité"],
-    keys: [["produit"], ["securite", "donnees"]],
-    minKeys: 2 },
-  { q: "Comment appelle-t-on un béton préparé en usine ?", indice: "Régularité et qualité",
-    r: ["BPE : Béton Prêt à l'Emploi."],
-    keys: [["bpe", "pret a l emploi", "pret a lemploi", "pret emploi"]],
-    minKeys: 1 },
-  { q: "Quelle est la durée maximale de transport du béton (sous conditions) ?", indice: "Durée",
-    r: ["1h30."],
-    keys: [["1h30", "1 h 30", "1h 30", "90 min", "90min", "une heure trente", "1 heure 30", "une heure et demie"]],
-    minKeys: 1 },
-  { q: "Quels sont les principes essentiels à respecter pour la mise en œuvre d'un coffrage ?", indice: "Une dalle conforme et homogène",
-    r: ["Indéformable et stable", "Étanche", "Propre"],
-    keys: [["indeformable", "stable", "rigide"], ["etanche"], ["propre"]],
-    minKeys: 2 },
-  { q: "Quelle longueur de recouvrement faut-il respecter avec les armatures (barre) ?", indice: "Diamètre",
-    r: ["40Ø ou 50Ø avec ligatures."],
-    keys: [["40"], ["50"]],
-    minKeys: 1 },
-  { q: "Qu'est-ce que l'enrobage ?", indice: "Calle",
-    r: ["Distance entre une armature et la peau de la paroi coulée."],
-    keys: [["distance", "espace", "ecart", "epaisseur"], ["armature", "ferraille", "acier"], ["peau", "paroi", "surface", "beton", "coffrage"]],
-    minKeys: 3 },
-  { q: "Quel produit permet de remplacer dans certaines conditions les armatures ?", indice: "Métalliques, organiques ou minérales",
-    r: ["Les fibres."],
-    keys: [["fibre"]],
-    minKeys: 1 },
+const themes = [
+  {
+    id: "beton", tag: "Béton", title: "Béton — Composition & mise en œuvre",
+    cards: [
+      { q: "Qu'est-ce que le ciment ?", indice: "Réaction au contact de l'eau", r: ["Liant hydraulique d'origine minérale, gâché avec de l'eau, il durcit par suite de réactions chimiques."], keys: [["liant"],["hydraulique","eau"],["durcit","durci","durcissement","reaction"]], minKeys: 2 },
+      { q: "Quelles sont les trois grandes classes de ciment ?", indice: "MPa", r: ["32,5","42,5","52,5"], keys: [["32,5","32.5","325","32 5"],["42,5","42.5","425","42 5"],["52,5","52.5","525","52 5"]], minKeys: 3 },
+      { q: "À quoi correspond la classe de résistance du ciment ?", indice: "X jours", r: ["À la valeur de la résistance à la compression testée à 28 jours."], keys: [["compression"],["28"]], minKeys: 2 },
+      { q: "Que signifie la lettre R après la valeur 32,5 ?", indice: "Résistance", r: ["Résistance élevée à court terme."], keys: [["resistance","rapide"],["court terme","court-terme","rapide","elevee","jeune age"]], minKeys: 2 },
+      { q: "Quels types de granulats peuvent être utilisés pour le béton ?", indice: "3 types", r: ["Granulats naturels courants","Granulats artificiels","Granulats recyclés"], keys: [["naturel"],["artificiel"],["recycle"]], minKeys: 3 },
+      { q: "Quels produits peuvent être incorporés au béton pour modifier ses propriétés ?", indice: "Liquide", r: ["Les adjuvants."], keys: [["adjuvant"]], minKeys: 1 },
+      { q: "Quel produit permet de limiter les contraintes dues au gel sur le béton durci ?", indice: "Bulles d'air", r: ["Adjuvant entraîneur d'air."], keys: [["entraineur","entraineurs","entraine"],["air"]], minKeys: 2 },
+      { q: "Quels types d'eau peuvent être utilisés pour le béton ?", indice: "4 types", r: ["Eau potable","Eau de pluie","Eau de nappe phréatique","Eau de mer (sauf armature)"], keys: [["potable"],["pluie"],["nappe","phreatique"],["mer"]], minKeys: 3 },
+      { q: "Quel est le dosage en eau recommandé ?", indice: "Rapport eau/ciment", r: ["Entre 0,4 et 0,6 litre d'eau pour 1 kg de ciment."], keys: [["0,4","0.4","04"],["0,6","0.6","06"]], minKeys: 2 },
+      { q: "Quel moyen rapide permet de déterminer la formulation adaptée pour un béton ?", indice: "Adapté aux granulats utilisés", r: ["L'abaque de Dreux."], keys: [["abaque","dreux"]], minKeys: 1 },
+      { q: "Quelles sont les conditions essentielles pour un bon stockage du ciment ?", indice: "Palette, bâche…", r: ["Stocké proprement (palettes…)","Protégé (pluie et chocs)","Séparé (les types de ciment)"], keys: [["propre","proprement","palette"],["protege","pluie","choc","bache","abri","sec"],["separe","separation","type"]], minKeys: 2 },
+      { q: "Quels sont les documents essentiels à avoir avant d'utiliser un adjuvant ?", indice: "Fiches", r: ["Fiche produit","Fiche de données sécurité"], keys: [["produit"],["securite","donnees"]], minKeys: 2 },
+      { q: "Comment appelle-t-on un béton préparé en usine ?", indice: "Régularité et qualité", r: ["BPE : Béton Prêt à l'Emploi."], keys: [["bpe","pret a l emploi","pret a lemploi","pret emploi"]], minKeys: 1 },
+      { q: "Quelle est la durée maximale de transport du béton (sous conditions) ?", indice: "Durée", r: ["1h30."], keys: [["1h30","1 h 30","1h 30","90 min","90min","une heure trente","1 heure 30","une heure et demie"]], minKeys: 1 },
+      { q: "Quels sont les principes essentiels à respecter pour la mise en œuvre d'un coffrage ?", indice: "Une dalle conforme et homogène", r: ["Indéformable et stable","Étanche","Propre"], keys: [["indeformable","stable","rigide"],["etanche"],["propre"]], minKeys: 2 },
+      { q: "Quelle longueur de recouvrement faut-il respecter avec les armatures (barre) ?", indice: "Diamètre", r: ["40Ø ou 50Ø avec ligatures."], keys: [["40"],["50"]], minKeys: 1 },
+      { q: "Qu'est-ce que l'enrobage ?", indice: "Calle", r: ["Distance entre une armature et la peau de la paroi coulée."], keys: [["distance","espace","ecart","epaisseur"],["armature","ferraille","acier"],["peau","paroi","surface","beton","coffrage"]], minKeys: 3 },
+      { q: "Quel produit permet de remplacer dans certaines conditions les armatures ?", indice: "Métalliques, organiques ou minérales", r: ["Les fibres."], keys: [["fibre"]], minKeys: 1 },
+    ]
+  },
+  {
+    id: "essais", tag: "Essais Béton", title: "Essais sur les bétons",
+    cards: [
+      { q: "Citez 4 essais sur les bétons.", indice: "Béton frais et béton durci", r: ["Affaissement","Air occlus","Scléromètre","Résistance à la compression / flexion / traction"], keys: [["affaissement"],["air occlus","air","occlus"],["sclerometre"],["compression","flexion","traction","resistance"]], minKeys: 3 },
+      { q: "Que permet l'essai d'affaissement ?", indice: "Cône d'Abrams", r: ["Contrôler l'ouvrabilité du béton frais."], keys: [["ouvrabilite","ouvrable","consistance"],["frais"]], minKeys: 1 },
+      { q: "Quand faut-il effectuer l'essai d'affaissement ?", indice: "Première phase", r: ["Lors de la livraison du béton sur le chantier."], keys: [["livraison","reception","arrivee"],["chantier"]], minKeys: 1 },
+      { q: "Nommez les 5 classes de consistance (d'affaissement) d'un béton.", indice: "Lettre - Numéro - Intitulé", r: ["S1 : ferme","S2 : plastique","S3 : très plastique","S4 : fluide","S5 : très fluide"], keys: [["s1","ferme"],["s2","plastique"],["s3","tres plastique"],["s4","fluide"],["s5","tres fluide"]], minKeys: 4 },
+      { q: "Que veut dire BPE ?", indice: "Camion toupie", r: ["Béton Prêt à l'Emploi."], keys: [["bpe","pret a l emploi","pret a lemploi","pret emploi","pret a l emplois"]], minKeys: 1 },
+      { q: "À quoi sert l'aéromètre à béton ?", indice: "Air", r: ["Mesurer la teneur en air d'un échantillon de béton."], keys: [["teneur","mesure","mesurer"],["air"]], minKeys: 2 },
+      { q: "Quelles sont les caractéristiques mécaniques du béton durci ?", indice: "1 Force et 2 Faiblesses", r: ["Fort en compression","Faible en traction","Faible en flexion"], keys: [["compression","fort"],["traction","faible"],["flexion"]], minKeys: 2 },
+      { q: "Quand faut-il effectuer l'essai de résistance ?", indice: "Deux dates majeures", r: ["À 7 jours et/ou à 28 jours (en laboratoire)."], keys: [["7"],["28"]], minKeys: 2 },
+      { q: "Quel est l'avantage de l'essai au scléromètre ?", indice: "", r: ["C'est un essai non destructif."], keys: [["non destructif","non-destructif","destructif"]], minKeys: 1 },
+    ]
+  },
+  {
+    id: "compactage", tag: "Compactage", title: "Protocole de compactage & portance",
+    cards: [
+      { q: "À quoi sert l'essai Proctor ?", indice: "Teneur en eau", r: ["Mesurer la teneur en eau optimale pour avoir une densité maximale après compactage."], keys: [["teneur","eau"],["optimale","optimal"],["densite","compactage","maximale"]], minKeys: 2 },
+      { q: "En plus du contrôle de portance, quels sont les points à analyser pour un terrassement routier ?", indice: "4 points", r: ["La qualité des matériaux","La déflexion","Les dispositifs de drainage","La bonne mise en œuvre des matériaux (compactage)"], keys: [["qualite","materiaux"],["deflexion"],["drainage","dispositif"],["mise en oeuvre","compactage","oeuvre"]], minKeys: 3 },
+      { q: "Quels sont les principaux essais de portance sur le chantier ?", indice: "3 essais", r: ["Dynaplaque","Essai à la plaque","Plaque dynamique"], keys: [["dynaplaque"],["plaque"],["dynamique","dynamometre"]], minKeys: 2 },
+    ]
+  },
+  {
+    id: "liants", tag: "Liants HC", title: "Liants hydrocarbonés",
+    cards: [
+      { q: "Pour quelles applications trouve-t-on des liants hydrocarbonés au quotidien ?", indice: "Les plus connues", r: ["Route et autoroute","Toitures","Étanchéité","Enrobés protecteurs"], keys: [["route","autoroute"],["toiture"],["etancheite","etanche"],["enrobe","protecteur"]], minKeys: 3 },
+      { q: "Quelles sont les propriétés mécaniques des liants hydrocarbonés ?", indice: "Il y en a quatre", r: ["Résistance à l'arrachement","Résistance au cisaillement","Résistance à la compression","Résistance à la fatigue"], keys: [["arrachement"],["cisaillement"],["compression"],["fatigue"]], minKeys: 3 },
+      { q: "Dans le domaine des routes, les liants bitumineux sont utilisés pour :", indice: "Fabrication et pose", r: ["Servant à la pose d'enduits superficiels","De couche d'accrochage","Dans les enrobés / divers"], keys: [["enduit","pose","superficiel"],["accrochage","couche"],["enrobe","divers"]], minKeys: 2 },
+      { q: "Comment sont créés les bitumes de pétrole ?", indice: "Comme le whisky", r: ["Par distillation atmosphérique","Par la distillation sous vide"], keys: [["distillation","atmospherique","atmospherique"],["sous vide","vide","distillation"]], minKeys: 1 },
+    ]
+  },
+  {
+    id: "admin", tag: "ENG-TP ADM", title: "Documents & administration matériel",
+    cards: [
+      { q: "Citez les 4 principaux documents devant accompagner un véhicule ou engin.", indice: "Dans le véhicule", r: ["Carte mécanographique","Carnet de bord","Le guide technique du véhicule","La fiche jébom"], keys: [["mecanographique","carte"],["carnet","bord"],["guide technique","guide","technique"],["jebom","fiche"]], minKeys: 3 },
+      { q: "Quels documents doivent accompagner un véhicule roulant dans le domaine public ?", indice: "Panne et accident", r: ["Consigne de dépannage","Constat"], keys: [["consigne","depannage"],["constat"]], minKeys: 1 },
+      { q: "Quel document doit accompagner un engin de levage ?", indice: "PV", r: ["PV IM 36002"], keys: [["36002","im 36002","pv im","pv"]], minKeys: 1 },
+      { q: "Quel document permet de suivre les échéances de visite ?", indice: "Potentiels", r: ["La fiche jébom."], keys: [["jebom"]], minKeys: 1 },
+      { q: "Qui est habilité à signer un carnet de bord pour un nouveau déplacement ?", indice: "FAC", r: ["Une autorité accréditée et identifiée sur le FAC similé."], keys: [["autorite","accredite","habilite"],["fac"]], minKeys: 1 },
+      { q: "Dans quels cas est éditée une demande de réparation, d'entretien ou d'intervention ?", indice: "3 cas", r: ["Visite arrivée à échéance","Une panne","Une détérioration"], keys: [["visite","echeance"],["panne"],["deterioration","deteriore"]], minKeys: 2 },
+      { q: "Quels documents permettent de retracer la vie d'un engin ou véhicule ?", indice: "MAT", r: ["MAT 7077","MAT 10004"], keys: [["7077"],["10004","10 004"]], minKeys: 1 },
+      { q: "Quel document atteste de la conformité d'un entretien ?", indice: "Rempli par l'utilisateur", r: ["La fiche d'entretien ou de visite."], keys: [["entretien","visite"],["fiche"]], minKeys: 1 },
+      { q: "Quel outil permet de faire un suivi des matériels en dotation ?", indice: "Physique ou dématérialisé", r: ["Le tableau de suivi du matériel."], keys: [["tableau","suivi"],["materiel"]], minKeys: 1 },
+    ]
+  },
+  {
+    id: "terrassement", tag: "Terrassement", title: "Engins & terrassement TP",
+    cards: [
+      { q: "Quels sont les trois groupes d'engins de travaux publics ?", indice: "3 groupes", r: ["Engins de chargement et manutention","Engins de transport","Engins de finition"], keys: [["chargement","manutention"],["transport"],["finition"]], minKeys: 2 },
+      { q: "Quels sont les aléas impactant la phase de terrassement ?", indice: "2 types", r: ["Techniques","Climatiques"], keys: [["technique"],["climatique"]], minKeys: 2 },
+      { q: "Qu'est-ce que le remblai ?", indice: "Volume", r: ["Volume de matériaux rapportés."], keys: [["materiaux","volume"],["rapporte","apporte","ajoute"]], minKeys: 1 },
+      { q: "Quel coefficient utiliser pour passer d'un volume en place à un volume tassé ?", indice: "X", r: ["Le coefficient de tassement (ou de compactage Cc) : Fr = F × T, avec Fr le foisonnement résiduel."], keys: [["tassement","compactage","cc","foisonnement"]], minKeys: 1 },
+      { q: "Quel coefficient est nécessaire pour passer d'un volume à une masse d'un matériau ?", indice: "m³ → Tonnes", r: ["La densité : ρ = M / V."], keys: [["densite","masse volumique"]], minKeys: 1 },
+      { q: "Sur une coupe verticale, quels sont les types de profils que l'on peut rencontrer ?", indice: "3 profils", r: ["Déblais","Remblais","Mixte"], keys: [["deblai"],["remblai"],["mixte"]], minKeys: 2 },
+      { q: "Que peut-on retrouver comme éléments dans les dépendances de chaussée ?", indice: "4 éléments", r: ["Fossé","Barrières","Talus","Trottoir"], keys: [["fosse"],["barriere"],["talus"],["trottoir"]], minKeys: 3 },
+    ]
+  },
+  {
+    id: "route", tag: "Route", title: "Assainissement & drainage routier",
+    cards: [
+      { q: "Quels sont les volets concernés par l'assainissement routier ?", indice: "Naturels, superficielles…", r: ["Rétablissement des écoulements naturels","Collecte et évacuation des eaux superficielles dans l'emprise de la route","Collecte et évacuation des eaux internes (drainage)","Lutte contre la pollution routière"], keys: [["retablissement","ecoulement","naturel"],["superficiel","collecte","evacuation"],["interne","drainage"],["pollution"]], minKeys: 2 },
+      { q: "Quelle est la pente longitudinale minimale à respecter pour une route ?", indice: "%", r: ["0,5 à 1 %"], keys: [["0,5","0.5","05"],["1"]], minKeys: 1 },
+      { q: "Quelle est la hauteur déterminante pour établir un fossé sur un profil en remblais ?", indice: "Pied ou tête de remblai", r: ["H < 3 m : fossé de pied de remblai","H > 3 m : fossé en tête de remblai, puis descente d'eau bétonnée jusqu'au pied de remblai"], keys: [["3"],["pied","tete","remblai"]], minKeys: 2 },
+      { q: "Quelle pente doit respecter un fossé ou ouvrage longitudinal en bord de chaussée ?", indice: "=", r: ["Revêtu si la pente est ≥ 1 % (au-delà de 4 % on effectue des ressauts)."], keys: [["1"],["revetu","pente","4"]], minKeys: 1 },
+      { q: "À partir de quel pourcentage de pente de fossé faut-il effectuer des ressauts ?", indice: "> à 4 %", r: ["Au-delà de 4 %."], keys: [["4"]], minKeys: 1 },
+      { q: "Qu'est-ce que le drainage ?", indice: "", r: ["Il consiste à collecter et à évacuer les eaux internes de la route ; elles proviennent des infiltrations au travers de la chaussée ou depuis les accotements, issues de l'environnement."], keys: [["collecter","evacuer","collecte"],["eau","interne"],["infiltration","chaussee","accotement"]], minKeys: 2 },
+      { q: "Citez trois dispositifs de drainage.", indice: "", r: ["Fossés profonds","Tranchées drainantes","Saignées drainantes","Éperon drainant","Couche drainante"], keys: [["fosse"],["tranchee"],["saignee"],["eperon"],["couche"]], minKeys: 3 },
+      { q: "Quels sont les éléments composant une tranchée drainante ?", indice: "", r: ["Remblai","Géotextile","Matériau drainant","Tuyau drainant"], keys: [["remblai"],["geotextile"],["materiau drainant","materiau","drainant"],["tuyau"]], minKeys: 3 },
+      { q: "Où est située une couche drainante dans une vue en coupe ?", indice: "Intercepte l'eau", r: ["Sous la chaussée future."], keys: [["sous","chaussee"],["future","futur"]], minKeys: 1 },
+    ]
+  },
 ];
 
-let mode = 'learn';          // learn | quiz | errors
-let deck = [...Array(cards.length).keys()];  // indices des cartes du paquet en cours
-let currentPos = 0;          // position dans le deck
+let currentTheme = null;
+let mode = 'learn';
+let deck = [];
+let currentPos = 0;
 let quizScore = { bon: 0, mauvais: 0 };
 let quizAnswered = false;
-let errorSet = new Set();    // indices (dans cards) des questions ratées
-let sessionErrors = new Set(); // erreurs de la session de quiz en cours
+let errorSets = {}; // par thème : Set d'indices
 
 function normalize(str) {
-  return str.toLowerCase()
-    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/[«»"'’.:;!?()\[\]\/]/g, " ")
-    .replace(/\s+/g, " ").trim();
+  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[«»"'’.:;!?()\[\]\/×]/g," ").replace(/\s+/g," ").trim();
 }
-
 function levenshtein(a, b) {
-  const m = a.length, n = b.length;
-  if (Math.abs(m - n) > 3) return 99;
-  const dp = Array.from({length: m+1}, (_, i) => [i, ...Array(n).fill(0)]);
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
-  for (let i = 1; i <= m; i++)
-    for (let j = 1; j <= n; j++)
-      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1]
-        : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  const m=a.length,n=b.length; if(Math.abs(m-n)>3) return 99;
+  const dp=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++)dp[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
   return dp[m][n];
 }
-
-// Une variante matche si elle apparaît dans la saisie (avec tolérance aux fautes pour les mots)
 function variantMatches(variant, userNorm, userWords) {
-  const v = normalize(variant);
-  // Match direct en sous-chaîne (gère "32,5" devenu "32 5", expressions multi-mots, etc.)
-  if (userNorm.includes(v)) return true;
-  // Tolérance orthographique : mot par mot, uniquement pour les variantes d'un seul mot de 5+ lettres
-  if (!v.includes(" ") && v.length >= 5) {
-    const maxDist = v.length <= 7 ? 1 : 2;
-    return userWords.some(w => w.length >= 4 && levenshtein(w, v) <= maxDist);
+  const v=normalize(variant);
+  if(userNorm.includes(v)) return true;
+  if(!v.includes(" ") && v.length>=5){
+    const maxDist=v.length<=7?1:2;
+    return userWords.some(w=>w.length>=4 && levenshtein(w,v)<=maxDist);
   }
   return false;
 }
-
 function checkAnswer(userVal, card) {
-  const userNorm = normalize(userVal);
-  const userWords = userNorm.split(" ").filter(w => w.length > 0);
-  let matched = 0;
-  for (const group of card.keys) {
-    if (group.some(variant => variantMatches(variant, userNorm, userWords))) matched++;
+  const userNorm=normalize(userVal);
+  const userWords=userNorm.split(" ").filter(w=>w.length>0);
+  let matched=0;
+  for(const group of card.keys){
+    if(group.some(v=>variantMatches(v,userNorm,userWords))) matched++;
   }
-  return matched >= card.minKeys;
+  return matched>=card.minKeys;
+}
+
+function goHome() {
+  currentTheme=null;
+  document.getElementById('modeSelector').style.display='none';
+  document.getElementById('progressWrap').style.display='none';
+  document.getElementById('homeLink').style.display='none';
+  document.getElementById('headerTag').textContent='Génie';
+  document.getElementById('headerTitle').textContent='Fiches de Mémorisation';
+  renderHome();
+}
+
+function renderHome() {
+  const main=document.getElementById('mainArea');
+  const cardsHtml=themes.map((t,i)=>{
+    const errs=errorSets[t.id]?errorSets[t.id].size:0;
+    const errBadge=errs>0?`<span class="tc-count" style="color:var(--rouge)">&#128260; ${errs} erreur${errs>1?'s':''} à revoir</span>`:'';
+    return `<button class="theme-card" onclick="openTheme(${i})">
+      <span class="tc-tag">${t.tag}</span>
+      <span class="tc-title">${t.title}</span>
+      <span class="tc-count">${t.cards.length} questions</span>
+      ${errBadge}
+    </button>`;
+  }).join('');
+  main.innerHTML=`
+    <div class="home-title">Choisis un thème</div>
+    <div class="home-sub">7 fiches de mémorisation — École du Génie. Sélectionne une fiche pour l'apprendre ou te tester.</div>
+    <div class="theme-grid">${cardsHtml}</div>
+  `;
+}
+
+function openTheme(i) {
+  currentTheme=themes[i];
+  if(!errorSets[currentTheme.id]) errorSets[currentTheme.id]=new Set();
+  document.getElementById('headerTag').textContent=currentTheme.tag;
+  document.getElementById('headerTitle').textContent=currentTheme.title;
+  document.getElementById('modeSelector').style.display='flex';
+  document.getElementById('progressWrap').style.display='flex';
+  document.getElementById('homeLink').style.display='inline';
+  setMode('learn');
 }
 
 function setMode(m) {
-  if (m === 'errors' && errorSet.size === 0) {
-    mode = m;
-    updateModeButtons();
-    document.getElementById('mainArea').innerHTML = `
+  if(m==='errors' && errorSets[currentTheme.id].size===0){
+    mode=m; updateModeButtons();
+    document.getElementById('mainArea').innerHTML=`
       <div class="complete-screen">
         <div class="complete-icon">&#128077;</div>
         <div class="complete-title">Aucune erreur</div>
         <div class="complete-sub">Fais d'abord le Quiz : chaque question ratée sera ajoutée ici automatiquement pour que tu puisses la retravailler.</div>
-        <div class="complete-buttons">
-          <button class="restart-btn" onclick="setMode('quiz')">&#9999;&#65039; Lancer le quiz</button>
-        </div>
+        <div class="complete-buttons"><button class="restart-btn" onclick="setMode('quiz')">&#9999;&#65039; Lancer le quiz</button></div>
       </div>`;
-    document.getElementById('progressFill').style.width = '0%';
-    document.getElementById('progressText').textContent = '0 / 0';
+    document.getElementById('progressFill').style.width='0%';
+    document.getElementById('progressText').textContent='0 / 0';
     return;
   }
-  mode = m;
-  if (m === 'errors') {
-    deck = [...errorSet];
-  } else {
-    deck = [...Array(cards.length).keys()];
-  }
-  currentPos = 0;
-  quizScore = { bon: 0, mauvais: 0 };
-  quizAnswered = false;
-  sessionErrors = new Set();
-  updateModeButtons();
-  render();
+  mode=m;
+  deck = (m==='errors') ? [...errorSets[currentTheme.id]] : [...Array(currentTheme.cards.length).keys()];
+  currentPos=0; quizScore={bon:0,mauvais:0}; quizAnswered=false;
+  updateModeButtons(); render();
 }
 
 function updateModeButtons() {
-  document.getElementById('btnLearn').classList.toggle('active', mode === 'learn');
-  document.getElementById('btnQuiz').classList.toggle('active', mode === 'quiz');
-  document.getElementById('btnErrors').classList.toggle('active', mode === 'errors');
-  const errCount = document.getElementById('errCount');
-  if (errorSet.size > 0) {
-    errCount.style.display = 'inline';
-    errCount.textContent = errorSet.size;
-  } else {
-    errCount.style.display = 'none';
-  }
+  document.getElementById('btnLearn').classList.toggle('active',mode==='learn');
+  document.getElementById('btnQuiz').classList.toggle('active',mode==='quiz');
+  document.getElementById('btnErrors').classList.toggle('active',mode==='errors');
+  const errCount=document.getElementById('errCount');
+  const n=errorSets[currentTheme.id]?errorSets[currentTheme.id].size:0;
+  if(n>0){errCount.style.display='inline';errCount.textContent=n;}
+  else{errCount.style.display='none';}
 }
 
 function updateProgress() {
-  const total = deck.length;
-  const pct = total ? Math.round((currentPos / total) * 100) : 0;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = currentPos + ' / ' + total;
+  const total=deck.length;
+  const pct=total?Math.round((currentPos/total)*100):0;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=currentPos+' / '+total;
 }
 
-function formatReponse(r) {
-  if (r.length === 1) return `<p>${r[0]}</p>`;
-  return `<ul>${r.map(x => `<li>${x}</li>`).join('')}</ul>`;
-}
+function formatReponse(r){ return r.length===1?`<p>${r[0]}</p>`:`<ul>${r.map(x=>`<li>${x}</li>`).join('')}</ul>`; }
 
 function render() {
   updateProgress();
-  const main = document.getElementById('mainArea');
-  if (currentPos >= deck.length) { renderComplete(main); return; }
-  if (mode === 'learn') renderLearn(main);
-  else renderQuiz(main);
+  const main=document.getElementById('mainArea');
+  if(currentPos>=deck.length){renderComplete(main);return;}
+  if(mode==='learn') renderLearn(main); else renderQuiz(main);
 }
 
 function renderLearn(main) {
-  const card = cards[deck[currentPos]];
-  main.innerHTML = `
+  const card=currentTheme.cards[deck[currentPos]];
+  const indiceHtml = card.indice ? `<span>Indice</span><span class="indice-value">${card.indice}</span>` : `<span>Question</span>`;
+  main.innerHTML=`
     <div class="learn-card">
-      <div class="card-indice">
-        <span>Indice</span>
-        <span class="indice-value">${card.indice}</span>
-      </div>
+      <div class="card-indice">${indiceHtml}</div>
       <div class="card-question">${card.q}</div>
       <div class="card-reponse" id="reponseZone">
-        <div class="card-reponse-hidden">
-          <button class="reveal-btn" onclick="revealAnswer()">Révéler la réponse</button>
-        </div>
+        <div class="card-reponse-hidden"><button class="reveal-btn" onclick="revealAnswer()">Révéler la réponse</button></div>
       </div>
     </div>
     <div class="nav-buttons">
       <button class="nav-btn btn-prev" onclick="prevCard()" ${currentPos===0?'disabled':''}>&#8592; Précédent</button>
       <button class="nav-btn btn-next" onclick="nextCard()">Suivant &#8594;</button>
     </div>
-    <div class="card-counter">Carte ${currentPos + 1} sur ${deck.length}</div>
-  `;
+    <div class="card-counter">Carte ${currentPos+1} sur ${deck.length}</div>`;
 }
-
-function revealAnswer() {
-  const card = cards[deck[currentPos]];
-  document.getElementById('reponseZone').innerHTML = formatReponse(card.r);
-}
+function revealAnswer(){ document.getElementById('reponseZone').innerHTML=formatReponse(currentTheme.cards[deck[currentPos]].r); }
 
 function renderQuiz(main) {
-  const card = cards[deck[currentPos]];
-  const reviewBanner = mode === 'errors'
-    ? `<div class="review-mode-banner"><span>&#128260; Révision des erreurs</span><button class="quit-review" onclick="setMode('quiz')">Quitter</button></div>`
-    : '';
-  main.innerHTML = `
+  const card=currentTheme.cards[deck[currentPos]];
+  const reviewBanner = mode==='errors' ? `<div class="review-mode-banner"><span>&#128260; Révision des erreurs</span><button class="quit-review" onclick="setMode('quiz')">Quitter</button></div>` : '';
+  const indiceHtml = card.indice ? `Indice : <span>${card.indice}</span>` : `<em>Pas d'indice</em>`;
+  main.innerHTML=`
     ${reviewBanner}
     <div class="score-display">
       <div class="score-badge bon"><span class="score-num">${quizScore.bon}</span><span class="score-label">&#10003; Correct</span></div>
       <div class="score-badge mauvais"><span class="score-num">${quizScore.mauvais}</span><span class="score-label">&#10007; À revoir</span></div>
-      <div class="score-badge restant"><span class="score-num">${deck.length - currentPos}</span><span class="score-label">Restantes</span></div>
+      <div class="score-badge restant"><span class="score-num">${deck.length-currentPos}</span><span class="score-label">Restantes</span></div>
     </div>
-    <div class="quiz-question-label">Question ${currentPos + 1} / ${deck.length}</div>
+    <div class="quiz-question-label">Question ${currentPos+1} / ${deck.length}</div>
     <div class="quiz-question-text">${card.q}</div>
-    <div class="quiz-indice-hint">Indice : <span>${card.indice}</span></div>
+    <div class="quiz-indice-hint">${indiceHtml}</div>
     <textarea class="quiz-input" id="quizInput" rows="3" placeholder="Ta réponse…"></textarea>
     <button class="quiz-submit" id="quizSubmit" onclick="submitQuiz()">Vérifier</button>
     <div class="verdict-banner" id="verdictBanner"></div>
@@ -616,107 +394,73 @@ function renderQuiz(main) {
       <div class="self-grade-answer">${formatReponse(card.r)}</div>
       <div class="self-grade-question" id="selfGradeQuestion"></div>
       <div class="self-grade-buttons" id="selfGradeButtons"></div>
-    </div>
-  `;
-  const input = document.getElementById('quizInput');
-  input.focus();
-  input.addEventListener('keydown', e => { if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitQuiz();} });
+    </div>`;
+  const input=document.getElementById('quizInput'); input.focus();
+  input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitQuiz();}});
 }
 
 function submitQuiz() {
-  if (quizAnswered) return;
-  const input = document.getElementById('quizInput');
-  const val = input.value.trim();
-  if (!val) return;
-  quizAnswered = true;
-
-  const cardIdx = deck[currentPos];
-  const card = cards[cardIdx];
-  const autoCorrect = checkAnswer(val, card);
-
-  document.getElementById('quizSubmit').disabled = true;
-  const box = document.getElementById('selfGradeBox');
-  box.style.display = 'block';
-  const banner = document.getElementById('verdictBanner');
-  const gq = document.getElementById('selfGradeQuestion');
-  const gb = document.getElementById('selfGradeButtons');
-
-  if (autoCorrect) {
-    banner.className = 'verdict-banner correct';
-    banner.innerHTML = '&#10003; Bonne réponse !';
-    input.classList.add('correct');
-    gq.textContent = '';
-    gb.innerHTML = `<button class="grade-btn grade-wrong" onclick="overrideGrade(false)">En fait je m'étais trompé</button>
-                    <button class="grade-btn grade-correct" onclick="confirmGrade(true)">Question suivante &#8594;</button>`;
+  if(quizAnswered) return;
+  const input=document.getElementById('quizInput');
+  const val=input.value.trim(); if(!val) return;
+  quizAnswered=true;
+  const card=currentTheme.cards[deck[currentPos]];
+  const autoCorrect=checkAnswer(val,card);
+  document.getElementById('quizSubmit').disabled=true;
+  document.getElementById('selfGradeBox').style.display='block';
+  const banner=document.getElementById('verdictBanner');
+  const gq=document.getElementById('selfGradeQuestion');
+  const gb=document.getElementById('selfGradeButtons');
+  if(autoCorrect){
+    banner.className='verdict-banner correct'; banner.innerHTML='&#10003; Bonne réponse !';
+    input.classList.add('correct'); gq.textContent='';
+    gb.innerHTML=`<button class="grade-btn grade-wrong" onclick="finalizeGrade(false)">En fait je m'étais trompé</button>
+                  <button class="grade-btn grade-correct" onclick="finalizeGrade(true)">Question suivante &#8594;</button>`;
   } else {
-    banner.className = 'verdict-banner wrong';
-    banner.innerHTML = '&#10007; Ça ne semble pas correspondre';
-    input.classList.add('wrong');
-    gq.textContent = 'Compare avec ta réponse — avais-tu juste sur le fond ?';
-    gb.innerHTML = `<button class="grade-btn grade-correct" onclick="overrideGrade(true)">&#10003; J'avais juste</button>
-                    <button class="grade-btn grade-wrong" onclick="confirmGrade(false)">&#10007; J'avais faux</button>`;
+    banner.className='verdict-banner wrong'; banner.innerHTML='&#10007; Ça ne semble pas correspondre';
+    input.classList.add('wrong'); gq.textContent='Compare avec ta réponse — avais-tu juste sur le fond ?';
+    gb.innerHTML=`<button class="grade-btn grade-correct" onclick="finalizeGrade(true)">&#10003; J'avais juste</button>
+                  <button class="grade-btn grade-wrong" onclick="finalizeGrade(false)">&#10007; J'avais faux</button>`;
   }
 }
-
-function confirmGrade(correct) { finalizeGrade(correct); }
-function overrideGrade(correct) { finalizeGrade(correct); }
 
 function finalizeGrade(correct) {
-  const cardIdx = deck[currentPos];
-  if (correct) {
-    quizScore.bon++;
-    errorSet.delete(cardIdx);
-  } else {
-    quizScore.mauvais++;
-    errorSet.add(cardIdx);
-    sessionErrors.add(cardIdx);
-  }
-  updateModeButtons();
-  nextCard();
+  const cardIdx=deck[currentPos];
+  if(correct){ quizScore.bon++; errorSets[currentTheme.id].delete(cardIdx); }
+  else { quizScore.mauvais++; errorSets[currentTheme.id].add(cardIdx); }
+  updateModeButtons(); nextCard();
 }
-
-function nextCard() {
-  currentPos++;
-  quizAnswered = false;
-  render();
-}
-
-function prevCard() {
-  if (currentPos > 0) { currentPos--; render(); }
-}
+function nextCard(){ currentPos++; quizAnswered=false; render(); }
+function prevCard(){ if(currentPos>0){currentPos--; render();} }
 
 function renderComplete(main) {
-  const total = deck.length;
-  let msg, icon;
-  if (mode === 'quiz' || mode === 'errors') {
-    const pct = total ? Math.round((quizScore.bon / total) * 100) : 0;
-    icon = pct >= 80 ? '&#127942;' : pct >= 50 ? '&#128170;' : '&#128218;';
-    msg = `${quizScore.bon} / ${total} correctes (${pct}%)`;
-  } else {
-    icon = '&#9989;';
-    msg = 'Tu as parcouru toutes les cartes !';
-  }
-
-  const errorsBtn = errorSet.size > 0
-    ? `<button class="errors-btn" onclick="setMode('errors')">&#128260; Réviser mes ${errorSet.size} erreur${errorSet.size>1?'s':''}</button>`
-    : (mode !== 'learn' ? `<p style="color:var(--vert);font-weight:600;font-size:14px;">&#127881; Aucune erreur à réviser !</p>` : '');
-
-  main.innerHTML = `
+  const total=deck.length;
+  let msg,icon;
+  if(mode==='quiz'||mode==='errors'){
+    const pct=total?Math.round((quizScore.bon/total)*100):0;
+    icon=pct>=80?'&#127942;':pct>=50?'&#128170;':'&#128218;';
+    msg=`${quizScore.bon} / ${total} correctes (${pct}%)`;
+  } else { icon='&#9989;'; msg='Tu as parcouru toutes les cartes !'; }
+  const nErr=errorSets[currentTheme.id].size;
+  const errorsBtn = nErr>0
+    ? `<button class="errors-btn" onclick="setMode('errors')">&#128260; Réviser mes ${nErr} erreur${nErr>1?'s':''}</button>`
+    : (mode!=='learn'?`<p style="color:var(--vert);font-weight:600;font-size:14px;">&#127881; Aucune erreur à réviser !</p>`:'');
+  main.innerHTML=`
     <div class="complete-screen">
       <div class="complete-icon">${icon}</div>
       <div class="complete-title">Terminé !</div>
       <div class="complete-sub">${msg}</div>
       <div class="complete-buttons">
         ${errorsBtn}
-        <button class="restart-btn" onclick="setMode('${mode === 'errors' ? (errorSet.size > 0 ? 'errors' : 'quiz') : mode}')">Recommencer</button>
+        <button class="restart-btn" onclick="setMode('${mode==='errors'?(nErr>0?'errors':'quiz'):mode}')">Recommencer</button>
+        <button class="home-btn" onclick="goHome()">&#8962; Choisir un autre thème</button>
       </div>
-    </div>
-  `;
-  document.getElementById('progressFill').style.width = '100%';
-  document.getElementById('progressText').textContent = total + ' / ' + total;
+    </div>`;
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('progressText').textContent=total+' / '+total;
 }
 
-setMode('learn');
+renderHome();
 </script>
 </body>
 </html>
