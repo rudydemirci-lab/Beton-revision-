@@ -104,7 +104,8 @@
   .self-grade-answer ul { list-style: none; }
   .self-grade-answer ul li::before { content: '\25B6 '; color: var(--rouge); font-size: 10px; }
   .self-grade-question { font-size: 14px; color: var(--gris-moyen); margin-bottom: 12px; font-weight: 600; }
-  .self-grade-buttons { display: flex; gap: 10px; }
+  .self-grade-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  .self-grade-buttons .grade-btn { min-width: 140px; }
   .grade-btn { flex: 1; padding: 14px; border: none; border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
   .grade-correct { background: var(--vert); color: white; }
   .grade-correct:hover { background: #246340; }
@@ -261,7 +262,8 @@ let deck = [];                 // tableau de {themeId, idx}
 let currentPos = 0;
 let quizScore = { bon: 0, mauvais: 0 };
 let quizAnswered = false;
-let errorSets = {};            // par thème : Set d'indices de cartes ratées
+let errorSets = {};            // par thème : Set d'indices de cartes ratées (récentes)
+let frequentErrors = new Set(); // clés "themeId:idx" — persistantes, retrait manuel uniquement
 let sessionTitle = '';         // titre affiché en header
 let sessionTag = '';           // tag affiché en header
 let sessionScope = null;       // {type:'theme'|'multi'|'global', themeIds:[...]} pour Recommencer
@@ -271,6 +273,8 @@ function getTheme(id){ return themes.find(t=>t.id===id); }
 function getCard(ref){ return getTheme(ref.themeId).cards[ref.idx]; }
 function ensureErrSet(id){ if(!errorSets[id]) errorSets[id]=new Set(); return errorSets[id]; }
 function totalErrors(){ return themes.reduce((s,t)=>s+(errorSets[t.id]?errorSets[t.id].size:0),0); }
+function efKey(themeId, idx){ return themeId+':'+idx; }
+function removeFrequent(themeId, idx){ frequentErrors.delete(efKey(themeId, idx)); }
 function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
 
 function normalize(str) {
@@ -335,11 +339,11 @@ function renderHome() {
       ${errBadge}
     </button>`;
   }).join('');
-  const nErr=totalErrors();
+  const nErr=frequentErrors.size;
   const globalErrCard = nErr>0
     ? `<button class="action-card errors-global" onclick="startGlobalErrors()">
          <span class="ac-title">&#128260; Mes erreurs fréquentes</span>
-         <span class="ac-desc">${nErr} question${nErr>1?'s':''} ratée${nErr>1?'s':''}, tous thèmes mélangés</span>
+         <span class="ac-desc">${nErr} question${nErr>1?'s':''} à retravailler, tous thèmes mélangés</span>
        </button>`
     : '';
   main.innerHTML=`
@@ -438,9 +442,17 @@ function startGlobalErrors() {
 // ===== MODES =====
 function currentErrorDeck() {
   let d=[];
-  sessionScope.themeIds.forEach(id=>{
-    (errorSets[id]||new Set()).forEach(idx=>d.push({themeId:id, idx}));
-  });
+  if(sessionScope && sessionScope.type==='global'){
+    // erreurs fréquentes persistantes
+    frequentErrors.forEach(key=>{
+      const [themeId, idxStr]=key.split(':');
+      d.push({themeId, idx:parseInt(idxStr,10)});
+    });
+  } else {
+    sessionScope.themeIds.forEach(id=>{
+      (errorSets[id]||new Set()).forEach(idx=>d.push({themeId:id, idx}));
+    });
+  }
   return d;
 }
 function setMode(m, doShuffle) {
@@ -449,12 +461,17 @@ function setMode(m, doShuffle) {
     deck=currentErrorDeck();
     if(deck.length===0){
       updateModeButtons();
+      const isGlobal = sessionScope && sessionScope.type==='global';
+      const body = isGlobal
+        ? `<div class="complete-sub">Tu as validé toutes tes erreurs fréquentes. &#127881;</div>
+           <div class="complete-buttons"><button class="restart-btn" onclick="goHome()">&#8962; Accueil</button></div>`
+        : `<div class="complete-sub">Fais d'abord le Quiz : chaque question ratée sera ajoutée ici automatiquement.</div>
+           <div class="complete-buttons"><button class="restart-btn" onclick="setMode('quiz', true)">&#9999;&#65039; Lancer le quiz</button></div>`;
       document.getElementById('mainArea').innerHTML=`
         <div class="complete-screen">
           <div class="complete-icon">&#128077;</div>
-          <div class="complete-title">Aucune erreur</div>
-          <div class="complete-sub">Fais d'abord le Quiz : chaque question ratée sera ajoutée ici automatiquement.</div>
-          <div class="complete-buttons"><button class="restart-btn" onclick="setMode('quiz', true)">&#9999;&#65039; Lancer le quiz</button></div>
+          <div class="complete-title">${isGlobal?'Liste vide':'Aucune erreur'}</div>
+          ${body}
         </div>`;
       document.getElementById('progressFill').style.width='0%';
       document.getElementById('progressText').textContent='0 / 0';
@@ -522,7 +539,7 @@ function revealAnswer(){ document.getElementById('reponseZone').innerHTML=format
 
 function renderQuiz(main) {
   const ref=deck[currentPos]; const card=getCard(ref);
-  const reviewBanner = mode==='errors' ? `<div class="review-mode-banner"><span>&#128260; Révision des erreurs</span><button class="quit-review" onclick="goHome()">Quitter</button></div>` : '';
+  const reviewBanner = mode==='errors' ? `<div class="review-mode-banner"><span>&#128260; ${sessionScope.type==='global'?'Erreurs fréquentes':'Révision des erreurs'}</span><button class="quit-review" onclick="goHome()">Quitter</button></div>` : '';
   const indiceHtml = card.indice ? `Indice : <span>${card.indice}</span>` : `<em>Pas d'indice</em>`;
   const themeTag = (sessionScope && sessionScope.type!=='theme') ? ` &#183; <span style="color:var(--beton)">${getTheme(ref.themeId).tag}</span>` : '';
   main.innerHTML=`
@@ -560,24 +577,44 @@ function submitQuiz() {
   const banner=document.getElementById('verdictBanner');
   const gq=document.getElementById('selfGradeQuestion');
   const gb=document.getElementById('selfGradeButtons');
+  const isGlobal = sessionScope && sessionScope.type==='global';
+  const validateBtn = isGlobal
+    ? `<button class="grade-btn grade-correct" onclick="validateFrequent()">&#10003; Je valide, retirer de la liste</button>`
+    : '';
   if(autoCorrect){
     banner.className='verdict-banner correct'; banner.innerHTML='&#10003; Bonne réponse !';
-    input.classList.add('correct'); gq.textContent='';
+    input.classList.add('correct'); gq.textContent= isGlobal ? 'Tu la maîtrises ? Retire-la, ou garde-la pour réviser encore.' : '';
     gb.innerHTML=`<button class="grade-btn grade-wrong" onclick="finalizeGrade(false)">En fait je m'étais trompé</button>
-                  <button class="grade-btn grade-correct" onclick="finalizeGrade(true)">Question suivante &#8594;</button>`;
+                  <button class="grade-btn grade-correct" onclick="finalizeGrade(true)">${isGlobal?'Garder &amp; continuer':'Question suivante'} &#8594;</button>`
+                  + validateBtn;
   } else {
     banner.className='verdict-banner wrong'; banner.innerHTML='&#10007; Ça ne semble pas correspondre';
     input.classList.add('wrong'); gq.textContent='Compare avec ta réponse — avais-tu juste sur le fond ?';
     gb.innerHTML=`<button class="grade-btn grade-correct" onclick="finalizeGrade(true)">&#10003; J'avais juste</button>
-                  <button class="grade-btn grade-wrong" onclick="finalizeGrade(false)">&#10007; J'avais faux</button>`;
+                  <button class="grade-btn grade-wrong" onclick="finalizeGrade(false)">&#10007; J'avais faux</button>`
+                  + validateBtn;
   }
 }
 
 function finalizeGrade(correct) {
   const ref=deck[currentPos];
   const set=ensureErrSet(ref.themeId);
-  if(correct){ quizScore.bon++; set.delete(ref.idx); }
-  else { quizScore.mauvais++; set.add(ref.idx); }
+  if(correct){
+    quizScore.bon++;
+    set.delete(ref.idx);            // sort des erreurs récentes du thème
+    // NB : reste dans frequentErrors jusqu'à validation manuelle
+  } else {
+    quizScore.mauvais++;
+    set.add(ref.idx);               // erreur récente du thème
+    frequentErrors.add(efKey(ref.themeId, ref.idx)); // + liste persistante
+  }
+  updateModeButtons(); nextCard();
+}
+function validateFrequent() {
+  const ref=deck[currentPos];
+  removeFrequent(ref.themeId, ref.idx);   // retrait définitif de la liste persistante
+  ensureErrSet(ref.themeId).delete(ref.idx);
+  quizScore.bon++;
   updateModeButtons(); nextCard();
 }
 function nextCard(){ currentPos++; quizAnswered=false; render(); }
