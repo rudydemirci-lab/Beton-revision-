@@ -38,6 +38,33 @@
   .theme-card .tc-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--rouge); }
   .theme-card .tc-title { font-size: 17px; font-weight: 600; line-height: 1.3; }
   .theme-card .tc-count { font-size: 12px; color: var(--gris-moyen); margin-top: 4px; }
+  .home-section-title { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gris-moyen); margin: 30px 0 14px; }
+  .home-actions { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 6px; }
+  @media (min-width: 560px) { .home-actions { grid-template-columns: 1fr 1fr; } }
+  .action-card { background: linear-gradient(135deg, var(--gris-fonce), #333); border: 1px solid var(--gris-moyen); border-radius: 4px; padding: 18px 20px; cursor: pointer; transition: all 0.18s; text-align: left; display: flex; flex-direction: column; gap: 4px; }
+  .action-card:hover { border-color: var(--rouge); transform: translateY(-2px); }
+  .action-card .ac-title { font-size: 16px; font-weight: 600; }
+  .action-card .ac-desc { font-size: 12px; color: var(--gris-moyen); }
+  .action-card.errors-global { border-color: var(--rouge); }
+  .action-card.errors-global .ac-title { color: #f87171; }
+  /* SELECTION SCREEN */
+  .select-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .select-item { display: flex; align-items: center; gap: 14px; background: var(--gris-fonce); border: 2px solid transparent; border-radius: 4px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; }
+  .select-item.checked { border-color: var(--rouge); background: rgba(192,39,45,0.08); }
+  .select-checkbox { width: 22px; height: 22px; border: 2px solid var(--gris-moyen); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; transition: all 0.15s; }
+  .select-item.checked .select-checkbox { background: var(--rouge); border-color: var(--rouge); }
+  .select-item-text { flex: 1; }
+  .select-item-title { font-size: 15px; font-weight: 600; }
+  .select-item-count { font-size: 12px; color: var(--gris-moyen); }
+  .select-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .select-all-btn { background: none; border: 1px solid var(--gris-moyen); color: var(--gris-moyen); font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 2px; cursor: pointer; }
+  .select-all-btn:hover { color: var(--blanc); border-color: var(--blanc); }
+  .select-launch { width: 100%; margin-top: 18px; padding: 16px; background: var(--rouge); border: none; border-radius: 2px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+  .select-launch:hover { background: #a01f24; }
+  .select-launch:disabled { background: var(--gris-moyen); cursor: default; }
+  .mode-choice { display: flex; gap: 12px; margin-bottom: 20px; }
+  .mode-choice-btn { flex: 1; padding: 14px; border: 2px solid var(--gris-moyen); background: var(--gris-fonce); color: var(--beton); border-radius: 2px; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.15s; }
+  .mode-choice-btn.active { border-color: var(--rouge); background: rgba(192,39,45,0.12); color: white; }
 
   /* CARDS */
   .learn-card { background: var(--gris-fonce); border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
@@ -189,10 +216,10 @@ const themes = [
   {
     id: "admin", tag: "ENG-TP ADM", title: "Documents & administration matériel",
     cards: [
-      { q: "Citez les 4 principaux documents devant accompagner un véhicule ou engin.", indice: "Dans le véhicule", r: ["Carte mécanographique","Carnet de bord","Le guide technique du véhicule","La fiche jéton"], keys: [["mecanographique","carte"],["carnet","bord"],["guide technique","guide","technique"],["jeton","fiche"]], minKeys: 3 },
+      { q: "Citez les 4 principaux documents devant accompagner un véhicule ou engin.", indice: "Dans le véhicule", r: ["Carte mécanographique","Carnet de bord","Le guide technique du véhicule","La fiche jeton"], keys: [["mecanographique","carte"],["carnet","bord"],["guide technique","guide","technique"],["jeton","fiche"]], minKeys: 3 },
       { q: "Quels documents doivent accompagner un véhicule roulant dans le domaine public ?", indice: "Panne et accident", r: ["Consigne de dépannage","Constat"], keys: [["consigne","depannage"],["constat"]], minKeys: 1 },
       { q: "Quel document doit accompagner un engin de levage ?", indice: "PV", r: ["PV IM 36002"], keys: [["36002","im 36002","pv im","pv"]], minKeys: 1 },
-      { q: "Quel document permet de suivre les échéances de visite ?", indice: "Potentiels", r: ["La fiche jéton."], keys: [["jeton"]], minKeys: 1 },
+      { q: "Quel document permet de suivre les échéances de visite ?", indice: "Potentiels", r: ["La fiche jeton."], keys: [["jeton"]], minKeys: 1 },
       { q: "Qui est habilité à signer un carnet de bord pour un nouveau déplacement ?", indice: "FAC", r: ["Une autorité accréditée et identifiée sur le FAC similé."], keys: [["autorite","accredite","habilite"],["fac"]], minKeys: 1 },
       { q: "Dans quels cas est éditée une demande de réparation, d'entretien ou d'intervention ?", indice: "3 cas", r: ["Visite arrivée à échéance","Une panne","Une détérioration"], keys: [["visite","echeance"],["panne"],["deterioration","deteriore"]], minKeys: 2 },
       { q: "Quels documents permettent de retracer la vie d'un engin ou véhicule ?", indice: "MAT", r: ["MAT 1017","MAT 10004"], keys: [["1017"],["10004","10 004"]], minKeys: 1 },
@@ -219,22 +246,32 @@ const themes = [
       { q: "Quelle est la pente longitudinale minimale à respecter pour une route ?", indice: "%", r: ["0,5 à 1 %"], keys: [["0,5","0.5","05"],["1"]], minKeys: 1 },
       { q: "Quelle est la hauteur déterminante pour établir un fossé sur un profil en remblais ?", indice: "Pied ou tête de remblai", r: ["H < 3 m : fossé de pied de remblai","H > 3 m : fossé en tête de remblai, puis descente d'eau bétonnée jusqu'au pied de remblai"], keys: [["3"],["pied","tete","remblai"]], minKeys: 2 },
       { q: "Quelle pente doit respecter un fossé ou ouvrage longitudinal en bord de chaussée ?", indice: "=", r: ["Revêtu si la pente est ≥ 1 %."], keys: [["1"],["revetu","pente"]], minKeys: 1 },
-      { q: "À partir de quel pourcentage de pente de fossé faut-il effectuer des ressauts ?", indice: "> à 4 %", r: ["Au-delà de 4 %."], keys: [["4"]], minKeys: 1 },
+      { q: "À partir de quel pourcentage de pente de fossé faut-il effectuer des ressauts ?", indice: "", r: ["Au-delà de 4 %."], keys: [["4"]], minKeys: 1 },
       { q: "Qu'est-ce que le drainage ?", indice: "", r: ["Il consiste à collecter et à évacuer les eaux internes de la route ; elles proviennent des infiltrations au travers de la chaussée ou depuis les accotements, issues de l'environnement."], keys: [["collecter","evacuer","collecte"],["eau","interne"],["infiltration","chaussee","accotement"]], minKeys: 2 },
-      { q: "Citez trois dispositifs de drainage.", indice: "", r: ["Fossés profonds","Tranchées drainantes","Saignées drainantes","Éperon drainant","Couche drainante"], keys: [["fosse"],["tranchee"],["saignee"],["eperon"],["couche"]], minKeys: 3 },
+      { q: "Citez trois dispositifs de drainage.", indice: "", r: ["Fossés profonds","Tranchées drainantes","Saignées drainantes","Écran drainant","Couche drainante"], keys: [["fosse"],["tranchee"],["saignee"],["ecran"],["couche"]], minKeys: 3 },
       { q: "Quels sont les éléments composant une tranchée drainante ?", indice: "", r: ["Remblai","Géotextile","Matériau drainant","Tuyau drainant"], keys: [["remblai"],["geotextile"],["materiau drainant","materiau","drainant"],["tuyau"]], minKeys: 3 },
-      { q: "Où est située une couche drainante dans une vue en coupe ?", indice: "Intercepte l'eau", r: ["Sous la chaussée future."], keys: [["sous","chaussee"],["future","futur"]], minKeys: 1 },
+      { q: "Où est située une couche drainante dans une vue en coupe ?", indice: "Intercepte l'eau", r: ["Intercalée entre la chaussée et le sol support."], keys: [["intercale","entre"],["chaussee"],["sol support","sol","support"]], minKeys: 2 },
     ]
   },
 ];
 
-let currentTheme = null;
-let mode = 'learn';
-let deck = [];
+// ===== ÉTAT =====
+let mode = 'learn';            // learn | quiz | errors
+let deck = [];                 // tableau de {themeId, idx}
 let currentPos = 0;
 let quizScore = { bon: 0, mauvais: 0 };
 let quizAnswered = false;
-let errorSets = {}; // par thème : Set d'indices
+let errorSets = {};            // par thème : Set d'indices de cartes ratées
+let sessionTitle = '';         // titre affiché en header
+let sessionTag = '';           // tag affiché en header
+let sessionScope = null;       // {type:'theme'|'multi'|'global', themeIds:[...]} pour Recommencer
+let pendingSelect = { themeIds: new Set(), launchMode: 'learn' }; // écran de sélection
+
+function getTheme(id){ return themes.find(t=>t.id===id); }
+function getCard(ref){ return getTheme(ref.themeId).cards[ref.idx]; }
+function ensureErrSet(id){ if(!errorSets[id]) errorSets[id]=new Set(); return errorSets[id]; }
+function totalErrors(){ return themes.reduce((s,t)=>s+(errorSets[t.id]?errorSets[t.id].size:0),0); }
+function shuffle(arr){ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} return arr; }
 
 function normalize(str) {
   return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
@@ -267,8 +304,16 @@ function checkAnswer(userVal, card) {
   return matched>=card.minKeys;
 }
 
+// ===== HEADER / NAV =====
+function showSession(tag, title){
+  sessionTag=tag; sessionTitle=title;
+  document.getElementById('headerTag').textContent=tag;
+  document.getElementById('headerTitle').textContent=title;
+  document.getElementById('modeSelector').style.display='flex';
+  document.getElementById('progressWrap').style.display='flex';
+  document.getElementById('homeLink').style.display='inline';
+}
 function goHome() {
-  currentTheme=null;
   document.getElementById('modeSelector').style.display='none';
   document.getElementById('progressWrap').style.display='none';
   document.getElementById('homeLink').style.display='none';
@@ -277,52 +322,149 @@ function goHome() {
   renderHome();
 }
 
+// ===== ACCUEIL =====
 function renderHome() {
   const main=document.getElementById('mainArea');
   const cardsHtml=themes.map((t,i)=>{
     const errs=errorSets[t.id]?errorSets[t.id].size:0;
     const errBadge=errs>0?`<span class="tc-count" style="color:var(--rouge)">&#128260; ${errs} erreur${errs>1?'s':''} à revoir</span>`:'';
-    return `<button class="theme-card" onclick="openTheme(${i})">
+    return `<button class="theme-card" onclick="openTheme('${t.id}')">
       <span class="tc-tag">${t.tag}</span>
       <span class="tc-title">${t.title}</span>
       <span class="tc-count">${t.cards.length} questions</span>
       ${errBadge}
     </button>`;
   }).join('');
+  const nErr=totalErrors();
+  const globalErrCard = nErr>0
+    ? `<button class="action-card errors-global" onclick="startGlobalErrors()">
+         <span class="ac-title">&#128260; Mes erreurs fréquentes</span>
+         <span class="ac-desc">${nErr} question${nErr>1?'s':''} ratée${nErr>1?'s':''}, tous thèmes mélangés</span>
+       </button>`
+    : '';
   main.innerHTML=`
-    <div class="home-title">Choisis un thème</div>
-    <div class="home-sub">7 fiches de mémorisation — École du Génie. Sélectionne une fiche pour l'apprendre ou te tester.</div>
+    <div class="home-title">Révision Génie</div>
+    <div class="home-sub">7 fiches de mémorisation — École du Génie. Choisis une fiche, ou lance un entraînement mélangé.</div>
+    <div class="home-actions">
+      <button class="action-card" onclick="openSelect()">
+        <span class="ac-title">&#127922; Mode aléatoire</span>
+        <span class="ac-desc">Choisis tes thèmes, questions mélangées</span>
+      </button>
+      ${globalErrCard}
+    </div>
+    <div class="home-section-title">Réviser une fiche</div>
     <div class="theme-grid">${cardsHtml}</div>
   `;
 }
 
-function openTheme(i) {
-  currentTheme=themes[i];
-  if(!errorSets[currentTheme.id]) errorSets[currentTheme.id]=new Set();
-  document.getElementById('headerTag').textContent=currentTheme.tag;
-  document.getElementById('headerTitle').textContent=currentTheme.title;
-  document.getElementById('modeSelector').style.display='flex';
-  document.getElementById('progressWrap').style.display='flex';
-  document.getElementById('homeLink').style.display='inline';
-  setMode('learn');
+// ===== SÉLECTION (mode aléatoire) =====
+function openSelect() {
+  pendingSelect.themeIds = new Set(themes.map(t=>t.id)); // tout coché par défaut
+  pendingSelect.launchMode = 'learn';
+  renderSelect();
+}
+function toggleSelect(id) {
+  if(pendingSelect.themeIds.has(id)) pendingSelect.themeIds.delete(id);
+  else pendingSelect.themeIds.add(id);
+  renderSelect();
+}
+function selectAll(on) {
+  pendingSelect.themeIds = on ? new Set(themes.map(t=>t.id)) : new Set();
+  renderSelect();
+}
+function setLaunchMode(m){ pendingSelect.launchMode=m; renderSelect(); }
+function renderSelect() {
+  const main=document.getElementById('mainArea');
+  const items=themes.map(t=>{
+    const checked=pendingSelect.themeIds.has(t.id);
+    return `<div class="select-item ${checked?'checked':''}" onclick="toggleSelect('${t.id}')">
+      <div class="select-checkbox">${checked?'&#10003;':''}</div>
+      <div class="select-item-text">
+        <div class="select-item-title">${t.tag} — ${t.title}</div>
+        <div class="select-item-count">${t.cards.length} questions</div>
+      </div>
+    </div>`;
+  }).join('');
+  const n=pendingSelect.themeIds.size;
+  const totalQ=themes.filter(t=>pendingSelect.themeIds.has(t.id)).reduce((s,t)=>s+t.cards.length,0);
+  main.innerHTML=`
+    <div class="home-title" style="font-size:24px">&#127922; Mode aléatoire</div>
+    <div class="home-sub">Sélectionne les thèmes, choisis le mode, puis lance. Les questions seront mélangées.</div>
+    <div class="mode-choice">
+      <button class="mode-choice-btn ${pendingSelect.launchMode==='learn'?'active':''}" onclick="setLaunchMode('learn')">&#128214; Apprendre</button>
+      <button class="mode-choice-btn ${pendingSelect.launchMode==='quiz'?'active':''}" onclick="setLaunchMode('quiz')">&#9999;&#65039; Quiz</button>
+    </div>
+    <div class="select-actions">
+      <button class="select-all-btn" onclick="selectAll(true)">Tout cocher</button>
+      <button class="select-all-btn" onclick="selectAll(false)">Tout décocher</button>
+    </div>
+    <div class="select-list" style="margin-top:14px">${items}</div>
+    <button class="select-launch" ${n===0?'disabled':''} onclick="startRandom()">
+      ${n===0?'Sélectionne au moins un thème':`Lancer &#183; ${totalQ} question${totalQ>1?'s':''}`}
+    </button>
+    <button class="home-btn" style="width:100%;margin-top:12px" onclick="goHome()">&#8962; Retour</button>
+  `;
 }
 
-function setMode(m) {
-  if(m==='errors' && errorSets[currentTheme.id].size===0){
-    mode=m; updateModeButtons();
-    document.getElementById('mainArea').innerHTML=`
-      <div class="complete-screen">
-        <div class="complete-icon">&#128077;</div>
-        <div class="complete-title">Aucune erreur</div>
-        <div class="complete-sub">Fais d'abord le Quiz : chaque question ratée sera ajoutée ici automatiquement pour que tu puisses la retravailler.</div>
-        <div class="complete-buttons"><button class="restart-btn" onclick="setMode('quiz')">&#9999;&#65039; Lancer le quiz</button></div>
-      </div>`;
-    document.getElementById('progressFill').style.width='0%';
-    document.getElementById('progressText').textContent='0 / 0';
-    return;
-  }
+// ===== LANCEMENTS =====
+function buildDeckFromThemes(themeIds, shuffleIt) {
+  let d=[];
+  themeIds.forEach(id=>{ getTheme(id).cards.forEach((c,idx)=>d.push({themeId:id, idx})); });
+  if(shuffleIt) shuffle(d);
+  return d;
+}
+function openTheme(id) {
+  ensureErrSet(id);
+  const t=getTheme(id);
+  sessionScope={type:'theme', themeIds:[id]};
+  showSession(t.tag, t.title);
+  setMode('learn');
+}
+function startRandom() {
+  const ids=[...pendingSelect.themeIds];
+  if(ids.length===0) return;
+  ids.forEach(ensureErrSet);
+  sessionScope={type:'multi', themeIds:ids};
+  const tag = ids.length===themes.length ? 'Tous' : ids.length+' thèmes';
+  showSession('🎲 '+tag, 'Mode aléatoire');
+  setMode(pendingSelect.launchMode, true);
+}
+function startGlobalErrors() {
+  sessionScope={type:'global', themeIds:themes.map(t=>t.id)};
+  showSession('🔁 Erreurs', 'Mes erreurs fréquentes');
+  setMode('errors', true);
+}
+
+// ===== MODES =====
+function currentErrorDeck() {
+  let d=[];
+  sessionScope.themeIds.forEach(id=>{
+    (errorSets[id]||new Set()).forEach(idx=>d.push({themeId:id, idx}));
+  });
+  return d;
+}
+function setMode(m, doShuffle) {
   mode=m;
-  deck = (m==='errors') ? [...errorSets[currentTheme.id]] : [...Array(currentTheme.cards.length).keys()];
+  if(m==='errors'){
+    deck=currentErrorDeck();
+    if(deck.length===0){
+      updateModeButtons();
+      document.getElementById('mainArea').innerHTML=`
+        <div class="complete-screen">
+          <div class="complete-icon">&#128077;</div>
+          <div class="complete-title">Aucune erreur</div>
+          <div class="complete-sub">Fais d'abord le Quiz : chaque question ratée sera ajoutée ici automatiquement.</div>
+          <div class="complete-buttons"><button class="restart-btn" onclick="setMode('quiz', true)">&#9999;&#65039; Lancer le quiz</button></div>
+        </div>`;
+      document.getElementById('progressFill').style.width='0%';
+      document.getElementById('progressText').textContent='0 / 0';
+      return;
+    }
+    shuffle(deck);
+  } else {
+    const multi = sessionScope.type!=='theme';
+    deck=buildDeckFromThemes(sessionScope.themeIds, doShuffle||multi);
+  }
   currentPos=0; quizScore={bon:0,mauvais:0}; quizAnswered=false;
   updateModeButtons(); render();
 }
@@ -332,7 +474,7 @@ function updateModeButtons() {
   document.getElementById('btnQuiz').classList.toggle('active',mode==='quiz');
   document.getElementById('btnErrors').classList.toggle('active',mode==='errors');
   const errCount=document.getElementById('errCount');
-  const n=errorSets[currentTheme.id]?errorSets[currentTheme.id].size:0;
+  const n=sessionScope?currentErrorDeck().length:0;
   if(n>0){errCount.style.display='inline';errCount.textContent=n;}
   else{errCount.style.display='none';}
 }
@@ -353,12 +495,18 @@ function render() {
   if(mode==='learn') renderLearn(main); else renderQuiz(main);
 }
 
+// petit label de thème (utile en mode mélangé)
+function themeLabel(ref){
+  if(sessionScope && sessionScope.type==='theme') return '';
+  return `<span style="margin-left:auto;font-size:11px;opacity:0.85">${getTheme(ref.themeId).tag}</span>`;
+}
+
 function renderLearn(main) {
-  const card=currentTheme.cards[deck[currentPos]];
+  const ref=deck[currentPos]; const card=getCard(ref);
   const indiceHtml = card.indice ? `<span>Indice</span><span class="indice-value">${card.indice}</span>` : `<span>Question</span>`;
   main.innerHTML=`
     <div class="learn-card">
-      <div class="card-indice">${indiceHtml}</div>
+      <div class="card-indice">${indiceHtml}${themeLabel(ref)}</div>
       <div class="card-question">${card.q}</div>
       <div class="card-reponse" id="reponseZone">
         <div class="card-reponse-hidden"><button class="reveal-btn" onclick="revealAnswer()">Révéler la réponse</button></div>
@@ -370,12 +518,13 @@ function renderLearn(main) {
     </div>
     <div class="card-counter">Carte ${currentPos+1} sur ${deck.length}</div>`;
 }
-function revealAnswer(){ document.getElementById('reponseZone').innerHTML=formatReponse(currentTheme.cards[deck[currentPos]].r); }
+function revealAnswer(){ document.getElementById('reponseZone').innerHTML=formatReponse(getCard(deck[currentPos]).r); }
 
 function renderQuiz(main) {
-  const card=currentTheme.cards[deck[currentPos]];
-  const reviewBanner = mode==='errors' ? `<div class="review-mode-banner"><span>&#128260; Révision des erreurs</span><button class="quit-review" onclick="setMode('quiz')">Quitter</button></div>` : '';
+  const ref=deck[currentPos]; const card=getCard(ref);
+  const reviewBanner = mode==='errors' ? `<div class="review-mode-banner"><span>&#128260; Révision des erreurs</span><button class="quit-review" onclick="goHome()">Quitter</button></div>` : '';
   const indiceHtml = card.indice ? `Indice : <span>${card.indice}</span>` : `<em>Pas d'indice</em>`;
+  const themeTag = (sessionScope && sessionScope.type!=='theme') ? ` &#183; <span style="color:var(--beton)">${getTheme(ref.themeId).tag}</span>` : '';
   main.innerHTML=`
     ${reviewBanner}
     <div class="score-display">
@@ -383,7 +532,7 @@ function renderQuiz(main) {
       <div class="score-badge mauvais"><span class="score-num">${quizScore.mauvais}</span><span class="score-label">&#10007; À revoir</span></div>
       <div class="score-badge restant"><span class="score-num">${deck.length-currentPos}</span><span class="score-label">Restantes</span></div>
     </div>
-    <div class="quiz-question-label">Question ${currentPos+1} / ${deck.length}</div>
+    <div class="quiz-question-label">Question ${currentPos+1} / ${deck.length}${themeTag}</div>
     <div class="quiz-question-text">${card.q}</div>
     <div class="quiz-indice-hint">${indiceHtml}</div>
     <textarea class="quiz-input" id="quizInput" rows="3" placeholder="Ta réponse…"></textarea>
@@ -404,7 +553,7 @@ function submitQuiz() {
   const input=document.getElementById('quizInput');
   const val=input.value.trim(); if(!val) return;
   quizAnswered=true;
-  const card=currentTheme.cards[deck[currentPos]];
+  const card=getCard(deck[currentPos]);
   const autoCorrect=checkAnswer(val,card);
   document.getElementById('quizSubmit').disabled=true;
   document.getElementById('selfGradeBox').style.display='block';
@@ -425,9 +574,10 @@ function submitQuiz() {
 }
 
 function finalizeGrade(correct) {
-  const cardIdx=deck[currentPos];
-  if(correct){ quizScore.bon++; errorSets[currentTheme.id].delete(cardIdx); }
-  else { quizScore.mauvais++; errorSets[currentTheme.id].add(cardIdx); }
+  const ref=deck[currentPos];
+  const set=ensureErrSet(ref.themeId);
+  if(correct){ quizScore.bon++; set.delete(ref.idx); }
+  else { quizScore.mauvais++; set.add(ref.idx); }
   updateModeButtons(); nextCard();
 }
 function nextCard(){ currentPos++; quizAnswered=false; render(); }
@@ -441,10 +591,12 @@ function renderComplete(main) {
     icon=pct>=80?'&#127942;':pct>=50?'&#128170;':'&#128218;';
     msg=`${quizScore.bon} / ${total} correctes (${pct}%)`;
   } else { icon='&#9989;'; msg='Tu as parcouru toutes les cartes !'; }
-  const nErr=errorSets[currentTheme.id].size;
+  const nErr=currentErrorDeck().length;
   const errorsBtn = nErr>0
-    ? `<button class="errors-btn" onclick="setMode('errors')">&#128260; Réviser mes ${nErr} erreur${nErr>1?'s':''}</button>`
+    ? `<button class="errors-btn" onclick="setMode('errors', true)">&#128260; Réviser mes ${nErr} erreur${nErr>1?'s':''}</button>`
     : (mode!=='learn'?`<p style="color:var(--vert);font-weight:600;font-size:14px;">&#127881; Aucune erreur à réviser !</p>`:'');
+  // Recommencer : relance le même périmètre dans le même mode
+  const restartMode = mode==='errors' ? (nErr>0?'errors':'quiz') : mode;
   main.innerHTML=`
     <div class="complete-screen">
       <div class="complete-icon">${icon}</div>
@@ -452,8 +604,8 @@ function renderComplete(main) {
       <div class="complete-sub">${msg}</div>
       <div class="complete-buttons">
         ${errorsBtn}
-        <button class="restart-btn" onclick="setMode('${mode==='errors'?(nErr>0?'errors':'quiz'):mode}')">Recommencer</button>
-        <button class="home-btn" onclick="goHome()">&#8962; Choisir un autre thème</button>
+        <button class="restart-btn" onclick="setMode('${restartMode}', true)">Recommencer</button>
+        <button class="home-btn" onclick="goHome()">&#8962; Accueil</button>
       </div>
     </div>`;
   document.getElementById('progressFill').style.width='100%';
