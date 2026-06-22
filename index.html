@@ -254,6 +254,22 @@ const themes = [
       { q: "Où est située une couche drainante dans une vue en coupe ?", indice: "Intercepte l'eau", r: ["Intercalée entre la chaussée et le sol support."], keys: [["intercale","entre"],["chaussee"],["sol support","sol","support"]], minKeys: 2 },
     ]
   },
+  {
+    id: "orgamouv", tag: "Orga Mouv", title: "Organisation des mouvements",
+    cards: [
+      { q: "Quels sont les documents exigibles en cas de contrôle ?", indice: "", r: ["Carnet de bord","Carte mécanographique","Le guide technique du matériel"], keys: [["carnet","bord"],["mecanographique","carte"],["guide technique","guide","technique"]], minKeys: 2 },
+      { q: "Que faut-il percevoir avant d'utiliser un engin ou de l'envoyer sur une mission ?", indice: "", r: ["Le lot de bord : extincteur, triangle de signalisation et gilet, outillage, cric de levage, pompe à graisse."], keys: [["lot de bord","lot","bord"],["extincteur","triangle","gilet","outillage","cric","pompe"]], minKeys: 2 },
+      { q: "Quelles sont les étapes à respecter avant de procéder à l'acheminement d'un matériel ?", indice: "", r: ["Lavage du matériel","Vérifications élémentaires (niveaux)","Préparation de son matériel à circuler sur route"], keys: [["lavage","laver"],["verification","niveau","elementaire"],["preparation","circuler","route","preparer"]], minKeys: 2 },
+      { q: "À quoi faut-il se reporter avant de procéder à l'arrimage d'un engin ?", indice: "", r: ["Au plan d'arrimage de l'engin et de la remorque."], keys: [["plan","arrimage"],["engin","remorque"]], minKeys: 1 },
+      { q: "Sous quelle périodicité doivent être vérifiés les moyens d'arrimage ?", indice: "", r: ["Avant et après chaque utilisation (on regarde l'état), et une visite par an."], keys: [["avant","apres","utilisation"],["visite","an","annuelle","annee"]], minKeys: 1 },
+      { q: "Quelle distance doit être respectée entre deux véhicules sur un convoi ?", indice: "km/h", r: ["Exprimée en mètres, elle est de l'ordre du double de la vitesse exprimée en km/h."], keys: [["double"],["vitesse","metre","km"]], minKeys: 1 },
+      { q: "Quels sont les mouvements sujets à un crédit mouvement ?", indice: "", r: ["Mouvements urgents (caractère ops)","MVT liés au service courant, exercices et entraînement"], keys: [["urgent","ops","operationnel"],["service courant","exercice","entrainement","service"]], minKeys: 1 },
+      { q: "Quelles sont les caractéristiques d'un véhicule le rendant « exceptionnel » ?", indice: "", r: ["Le tonnage","La dimension (+ de 2,55 m de largeur)"], keys: [["tonnage","poids","masse"],["dimension","2,55","2.55","255","largeur"]], minKeys: 1 },
+      { q: "Quel est généralement le délai à respecter entre une demande et un mouvement ?", indice: "", r: ["2 semaines."], keys: [["2 semaine","2 semaines","deux semaines","2semaines","15 jours","quinze jours"]], minKeys: 1 },
+      { q: "Où doit être inscrit le numéro de crédit mouvement ?", indice: "", r: ["Sur les deux côtés des VL et, si possible, à l'avant de chaque véhicule de la colonne."], keys: [["deux cotes","cote","cotes","cote"],["vl","avant","colonne","vehicule"]], minKeys: 1 },
+      { q: "Qui est responsable de l'exécution de la mission de transport ?", indice: "", r: ["Le chef de rame."], keys: [["chef de rame","chef","rame"]], minKeys: 1 },
+    ]
+  },
 ];
 
 // ===== ÉTAT =====
@@ -348,7 +364,7 @@ function renderHome() {
     : '';
   main.innerHTML=`
     <div class="home-title">Révision Génie</div>
-    <div class="home-sub">7 fiches de mémorisation — École du Génie. Choisis une fiche, ou lance un entraînement mélangé.</div>
+    <div class="home-sub">8 fiches de mémorisation — École du Génie. Choisis une fiche, ou lance un entraînement mélangé.</div>
     <div class="home-actions">
       <button class="action-card" onclick="openSelect()">
         <span class="ac-title">&#127922; Mode aléatoire</span>
