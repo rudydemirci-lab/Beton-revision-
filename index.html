@@ -353,6 +353,42 @@ const themes = [
       { q: "Quels sont les trois grandes étapes clefs d'une implantation en topographie ?", indice: "A / IP / MA", r: ["Analyser le projet","Implantation planimétrique","Matérialisation altimétrique"], keys: [["analyse","analyser","projet"],["implantation","planimetrique"],["materialisation","altimetrique"]], minKeys: 2 },
     ]
   },
+  {
+    id: "durcissement", tag: "Durcissement", title: "Durcissement des structures",
+    cards: [
+      // --- Généralités génie / organisation ---
+      { q: "Quelles sont les 3 composantes du génie ?", indice: "", r: ["Combat","Secours","Infrastructure"], keys: [["combat"],["secours"],["infrastructure"]], minKeys: 2 },
+      { q: "Quelles sont les deux grandes missions d'appui ?", indice: "", r: ["Appui direct au combat","Appui général à la force"], keys: [["direct","combat"],["general","force"]], minKeys: 2 },
+      { q: "Quelle est la sous-mission que l'on retrouve dans l'appui direct au combat ?", indice: "", r: ["Appui au déploiement d'urgence."], keys: [["deploiement"]], minKeys: 1 },
+      { q: "Quelles sections retrouve-t-on dans une compagnie d'appui d'un RGBIA ?", indice: "", r: ["S.TS (section travaux et soutien)","S.AD (section d'appui au déploiement)","S.EEA (section énergie électromécanique appliquée)"], keys: [["sts","s ts","ts"],["sad","s ad","ad"],["seea","s eea","eea"]], minKeys: 2 },
+      { q: "Que signifie l'acronyme EEA ?", indice: "", r: ["Énergie Électromécanique Appliquée."], keys: [["energie"],["electromecanique"],["appliquee","applique"]], minKeys: 2 },
+      { q: "Que signifie l'acronyme ACAD ?", indice: "", r: ["Atelier de Campagne d'Appui au Déploiement."], keys: [["atelier"],["campagne"],["appui"],["deploiement"]], minKeys: 2 },
+      { q: "Quels sont les 4 corps de métier que l'on retrouve dans l'ACAD ?", indice: "", r: ["Électricité","Menuiserie","Maçonnerie","Plomberie"], keys: [["electricite"],["menuiserie"],["maconnerie"],["plomberie"]], minKeys: 3 },
+      { q: "L'UMTE (unité mobile de traitement de l'eau) a un rendement de combien de m³ par heure ?", indice: "", r: ["1,5 m³/heure."], keys: [["1,5","1.5","15"]], minKeys: 1 },
+      { q: "Que signifie RGBIA ?", indice: "", r: ["Régiment de Brigade Interarme."], keys: [["regiment"],["brigade"],["interarme"]], minKeys: 2 },
+      { q: "Combien y a-t-il de régiments de génie ?", indice: "9 régiments", r: ["9 régiments : 1ᵉʳ REG, 2ᵉ REG, 3ᵉ RG, 6ᵉ RG, 13ᵉ RG, 17ᵉ RG, 19ᵉ RG, 31ᵉ RG, 25ᵉ RGA."], keys: [["9","neuf"]], minKeys: 1 },
+      { q: "À quelle distance doit se trouver un dépôt carburant de tout autre zone ?", indice: "", r: ["50 m."], keys: [["50"]], minKeys: 1 },
+      // --- Postes et abris ---
+      { q: "Quels sont les 3 éléments à prendre en compte pour la réalisation d'un poste ou d'un abri ?", indice: "", r: ["Protection","Conception","Répartition"], keys: [["protection"],["conception"],["repartition"]], minKeys: 2 },
+      { q: "Quelles sont les 3 parties qui composent la toiture d'un poste ?", indice: "", r: ["Structure porteuse","Système d'étanchéité","Protection"], keys: [["structure porteuse","porteuse","structure"],["etancheite"],["protection"]], minKeys: 2 },
+      { q: "Quel est le principal inconvénient des postes et abris semi-enterrés et enterrés ?", indice: "", r: ["L'évacuation de l'eau."], keys: [["evacuation","eau"]], minKeys: 1 },
+      // --- Compartimentage / renforcement ---
+      { q: "À quoi sert le compartimentage ?", indice: "", r: ["Limiter les dégâts d'une explosion au seul compartiment touché."], keys: [["limiter","degat","explosion"],["compartiment"]], minKeys: 1 },
+      { q: "Combien y a-t-il de niveaux de renforcement ?", indice: "", r: ["3 niveaux : R1, R2, R3."], keys: [["3","r1","r2","r3","trois"]], minKeys: 1 },
+      { q: "Combien de largeurs de sac à terre faut-il pour un renforcement R3 ?", indice: "", r: ["6 largeurs."], keys: [["6","six"]], minKeys: 1 },
+      // --- Murs / matériaux / protection ---
+      { q: "Combien y a-t-il de catégories de matériaux pour les murs ?", indice: "", r: ["13 catégories de matériaux."], keys: [["13","treize"]], minKeys: 1 },
+      { q: "Citez au moins 2 dispositifs de protection.", indice: "", r: ["Grillage d'éclatement","Dispositif anti-écaillage","Mur écran","Blindage additionnel"], keys: [["grillage","eclatement"],["anti ecaillage","ecaillage","anti-ecaillage"],["mur ecran","ecran"],["blindage","additionnel","additionel"]], minKeys: 2 },
+      { q: "À quoi servent les dispositifs de protection ?", indice: "", r: ["Arrêter le projectile","Pré-déclencher le projectile","Dévier le projectile"], keys: [["arreter"],["pre declencher","declencher","pre-declencher"],["devier"]], minKeys: 2 },
+      // --- Durcissement bâtiment ---
+      { q: "Dans quelle zone êtes-vous susceptible de réaliser un durcissement d'infrastructure ?", indice: "", r: ["Zone de déploiement opérationnelle","Zone urbaine"], keys: [["deploiement","operationnelle","operationnel"],["urbaine","urbain"]], minKeys: 1 },
+      { q: "Combien y a-t-il de catégories de munition selon le TTA 722 ?", indice: "", r: ["5 catégories."], keys: [["5","cinq"]], minKeys: 1 },
+      { q: "Quelles sont les deux types de structures de bâtiments que vous pouvez rencontrer ?", indice: "", r: ["Murs porteurs","Poteaux-poutres"], keys: [["mur porteur","porteur","murs porteurs"],["poteaux","poutre","poteaux poutres"]], minKeys: 2 },
+      { q: "Dans quelle catégorie sont regroupées les munitions incendiaires ?", indice: "", r: ["Catégorie A4."], keys: [["a4","a 4"]], minKeys: 1 },
+      { q: "Quelles agressions peuvent impacter les 3 parties d'un bâtiment ?", indice: "", r: ["Les agressions A3 et A5."], keys: [["a3","a 3"],["a5","a 5"]], minKeys: 1 },
+      { q: "Avant d'investir un bâtiment pour le durcir, que devez-vous vérifier ?", indice: "", r: ["Vérifier son état","Vérifier les matériaux qui le composent","Vérifier l'épaisseur des murs, de la toiture et du plancher"], keys: [["etat"],["materiaux","compose","composent"],["epaisseur","mur","toiture","plancher"]], minKeys: 2 },
+    ]
+  },
 ];
 
 // ===== ÉTAT =====
@@ -447,7 +483,7 @@ function renderHome() {
     : '';
   main.innerHTML=`
     <div class="home-title">Révision Génie</div>
-    <div class="home-sub">9 fiches de mémorisation — École du Génie. Choisis une fiche, ou lance un entraînement mélangé.</div>
+    <div class="home-sub">10 fiches de mémorisation — École du Génie. Choisis une fiche, ou lance un entraînement mélangé.</div>
     <div class="home-actions">
       <button class="action-card" onclick="openSelect()">
         <span class="ac-title">&#127922; Mode aléatoire</span>
